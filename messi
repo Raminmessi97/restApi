@@ -1,0 +1,91 @@
+#!/usr/bin/env php
+<?php
+
+
+require_once 'vendor/autoload.php';
+
+
+
+array_shift($argv);
+$num_of_argvs = count($argv);
+
+
+
+$array = explode(":", $argv[0]);
+
+$for_handlers = $array[1];
+
+$class =ucfirst($array[1]);
+$for_handlers2 = $class."s";
+
+
+$class = "\Cmd\\".$class;
+
+array_shift($argv);
+
+
+
+
+
+
+$all_handlers = [
+	'controller'=>
+	[
+		'CreateController',
+		'CreateModel',
+		'CreateMethod',
+		'CreateResource'
+	],
+
+	'model'=>[
+		'CreateMmodel',
+		'CreateMcontroller',
+	],
+
+	'template'=>[
+		'CreateTemplate'
+	],
+
+];
+
+
+$before_use_handlers = $all_handlers[$for_handlers];
+$handle_objects = [];
+
+for ($i=0; $i<count($before_use_handlers); $i++) { 
+	$handler = "\Cmd\Handlers\\".$for_handlers2."\\".$before_use_handlers[$i];
+	$obj = new $handler;
+	$handle_objects[] = $obj;
+}
+
+for ($i=0; $i <count($handle_objects) ; $i++) { 
+	if(isset($handle_objects[$i+1])){	
+		$handle_objects[$i]->setNext($handle_objects[$i+1]);
+	}
+}
+
+
+
+$first_handler = $handle_objects[0];
+
+if(isset($argv[0])){
+	$name = $argv[0];
+
+if(preg_match("/^[a-zA-Z \/]+$/", $name)){
+
+	$object = new $class;
+	$ar = $object->getParams($name,$argv);
+	$class::call_all_functions($first_handler);
+}
+
+}
+else{
+	echo "Please enter ".$class." name"."\n";
+}
+
+
+
+
+
+
+?>

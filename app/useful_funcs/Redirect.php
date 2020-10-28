@@ -1,0 +1,24 @@
+<?php
+
+namespace App\Useful_funcs;
+
+
+class Redirect{
+
+
+     /**
+     * Redirect method(Переадресуем на другую страницу с некоторыми данными)
+     *
+     * @param string $url,string $name,array $data
+     * @return header
+     */
+
+	public static function redirect($url,$name,$data){
+
+		$_SESSION[$name] = $data;
+
+		$url = URL_MAIN.$url;
+	    header('Location:'.$url);
+	}
+
+}

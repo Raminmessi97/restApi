@@ -1,0 +1,9 @@
+@import 'mixins'; 
+// @import '~bootstrap/scss/bootstrap';
+@import '~@fortawesome/fontawesome-free/css/fontawesome.css';
+
+#delete-cat{
+	@include nice-button;
+}
+
+// 
