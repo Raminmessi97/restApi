@@ -10,7 +10,6 @@ class Kernel {
      */
 	private static $route_middlewares = [
 		'auth' => '\App\Http\Middlewares\AuthMiddleware',
-		'noauth' => '\App\Http\Middlewares\NoAuthMiddleware',
 		'admin' => '\App\Http\Middlewares\AdminMiddleware'
 	];
 

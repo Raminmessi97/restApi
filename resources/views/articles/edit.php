@@ -39,8 +39,9 @@
 	 ?>
 
 
-		<form action="<?php echo URL_MAIN ?>articles/update/<?php echo $article->id?>" method="post">
-			<input type="hidden" required="required" name="csrf_token" value="<?php echo $csrf_token; ?>" >
+		<form action="<?php echo URL_MAIN ?>articles/<?php echo $article->id?>" method="post">
+			<input type="hidden" required="required" name="csrf_token" value="<?php echo $csrf_token; ?>">
+			<input type="hidden" name="REQUEST_METHOD" value="PUT"/>
 			<input type="text" name="title" placeholder="Title of article" value="<?php echo $article->title?>">
 			<input type="textarea" name="text" placeholder="Text of article" value="<?php echo $article->text?>">
 			<input type="submit" value="Update">

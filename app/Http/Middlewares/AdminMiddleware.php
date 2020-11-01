@@ -5,12 +5,15 @@ namespace App\Http\Middlewares;
 
 class AdminMiddleware extends Middleware{
 	
+	/**
+     * @param  $array $authorised_author
+     * @param  $array $all_users
+     */
+	public function check($author,$authors){
 
-	public function check($author_name,$list_authors){
-			if($author_name==="ramin.hes.97@gmail.com"){
-				// echo "this is admin\n";
-				return parent::check($author_name,$list_authors);
-			}
-			return false;
+		if(($author['author_email']=="ramin.hes.97@gmail.com")&&($author['author_role']==2)){
+			return parent::check($author,$authors);
+		}
+		return false;
 	}
 }

@@ -3,23 +3,24 @@
 namespace App\Http\Controllers;
 use App\Models\Article;
 use App\Views\View;
+use App\Useful_funcs\NiceOutput;
 
 class MainController {
 
 	
      /**
-     * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  int  $current_page
      */
-     public function main(){
-          // $object = Articles::getInstance();
-          // $articles = $object->findAll()->get();
+     public function main($page=1){
+          $pag_data = Article::paginate(5,$page);
 
-          // print_r($articles);
-
-          View::view('homepage',[]);
+          $data = [
+               'data'=>$pag_data->data,
+               'links'=>$pag_data->links
+          ];
+     
+          View::view('homepage',$data);
      }
 
 

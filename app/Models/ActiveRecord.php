@@ -2,6 +2,7 @@
 
 namespace App\Models;
 use Database\Database;
+use App\Useful_funcs\Pagination;
 
 abstract class ActiveRecord {
 	/**
@@ -45,10 +46,10 @@ abstract class ActiveRecord {
 
 
 	public static function getInstance(){
-		if(self::$instance==null){
+		// if(self::$instance==null){
 			return self::$instance = new static();
-		}
-		return self::$instance;
+		// }
+		// return self::$instance;
 	}
 
 
@@ -72,6 +73,23 @@ abstract class ActiveRecord {
 		return $this;
 	}
 
+	/**
+     * Статический Метод для получения всех данных (например всех статей)
+     */
+
+	public static function getAll(){
+		$connect =  Database::getInstance();
+
+		$sql = "SELECT * FROM ".static::getTableName();
+		$params = [];
+
+		$result = $connect->query($sql,$params,static::class);
+		if($result)
+			return $result;
+		else 
+			return false;
+	}
+
 
 
 	/**
@@ -88,7 +106,7 @@ abstract class ActiveRecord {
 	}
 
 	/**
-     * Метод для получение одной записи
+     * Статический Метод для получение одной записи
      *@param int $id
      */
 
@@ -150,6 +168,7 @@ abstract class ActiveRecord {
      */
 
 	public function create(){
+
 		$mapProperties = array_filter($this->reflection()); // delete null values
 		$columns = [];
 		$values = [];
@@ -163,7 +182,7 @@ abstract class ActiveRecord {
 		$values = implode(",",$values);
 
 		$sql = "INSERT INTO ".static::getTableName()."(".$columns.") VALUES(".$values.")";
-		$result = $this->databaseConnect->create($sql,$mapProperties,static::class);
+		$result = $this->databaseConnect->crud($sql,$mapProperties,static::class);
 
 		return $result;
 	}
@@ -173,15 +192,12 @@ abstract class ActiveRecord {
      *@param array $data
      */
 	public function update($data){
-		$id = $this->id;
-		$columns = [];
-		$values = [];
 
+		$id = $this->id;
 		$res = "";
 
 		foreach ($data as $column => $value) {
 			$res.=$column."=:".$column.",";
-			// $values[] = ":".$column;
 		}
 		$res = trim($res,',');
 		$params = $data;
@@ -199,6 +215,7 @@ abstract class ActiveRecord {
      *@param int $id
      */
 	public function delete(){
+
 		$id =  $this->id;
 		$sql = "DELETE FROM ".static::getTableName()." WHERE id=:id";
 
@@ -207,26 +224,77 @@ abstract class ActiveRecord {
 		return $result;
 	}
 
-	// 
 
-	// Pagination
+	 /**
+     * Получаем данные в зависимости от страницы $current_page
+     *
+     * @param int $limit (Количество данных на одной странице)
+     * @return $this
+     */
 
-	public function get_pag_data($current_page,$limit){
+	public static function paginate($limit,$current_page){
+		
+		$connect =  Database::getInstance();
+
+		$count = static::getCount();
+
+		$pagination = new Pagination($count,$limit,$current_page);
+		$html=$pagination->get_pag();
+
 		$offset = ($current_page-1)*$limit;
+		$sql = "SELECT * FROM ".static::getTableName()." LIMIT ".$limit." OFFSET ".$offset;
+		$params = [];
 
-		$sql = " LIMIT ".$limit." OFFSET ".$offset;
-		$this->sql.= $sql;
 
-		return $this;
+
+
+		$result = $connect->query($sql,$params,static::class);
+
+		// 
+		if($result){
+			$object = new \StdClass();
+			foreach ($result as $key => $value)
+			{
+			    $object->data[] = $value;
+			}
+			$object->links = $html; // в links мы храним ссылки на страницы
+			return $object;
+		}
+		else{
+			return false;
+		}
+		
+
+
+
 
 	}
 
+
+
+
+	/**
+     * Метод, возвращающий количество записей
+     */
+	public static function getCount(){
+		$connect =  Database::getInstance();
+
+		$sql = "SELECT * FROM ".static::getTableName();
+		$params = [];
+
+		$result = $connect->query($sql,$params,static::class);
+		if($result)
+			return count($result);
+		else 
+			return false;
+	}
 
 
 	/**
      * Конечный метод
      */
 	public function get(){
+
 		$sql = $this->sql;
 		$params = $this->params;
 

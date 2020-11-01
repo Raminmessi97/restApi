@@ -24,7 +24,7 @@ class Pagination {
 
 
 	 public function get_pag(){
-		// $html = "Amount-".$this->amount."..max_in_one_page".$this->max_in_one_page."..current_page".$this->current_page;
+
 	 	$this->html.= "<div class='main_pagination'>";
 		
 
@@ -39,7 +39,7 @@ class Pagination {
 
 		$num_of_pages = $this->get_num_pages();
 
-		for ($i=1; $i<$num_of_pages ; $i++) {
+		for ($i=1; $i<=$num_of_pages; $i++) {
 
 			if($i===$current_page){
 				$this->html.="<a class='pag_pages current_page' href='".$this->prefix.$i."'>".$i."</a>";
@@ -66,7 +66,7 @@ class Pagination {
 	}
 
 	private function get_num_pages(){
-		$num = intval(($this->amount/$this->max_in_one_page)+1);
+		$num = intval(($this->amount/$this->max_in_one_page))+1;
 		$this->last_page = $num;
 		return $num;
 	}

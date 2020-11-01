@@ -4,6 +4,7 @@
 use App\Views\View;
 use App\Useful_funcs\Defeat;
 use App\Useful_funcs\Redirect;
+use App\Http\Request;
 
 class ArticleController {
 
@@ -13,10 +14,10 @@
      *
      */
 	public function index(){
-	  header('Content-Type: application/json');
- 	  $object = Article::getInstance();
- 	  $articles = $object->findAll()->get();
- 	  print_r(json_encode($articles,JSON_PRETTY_PRINT));
+	  // header('Content-Type: application/json');
+ 	 //  $object = Article::getInstance();
+ 	 //  $articles = $object->findAll()->get();
+ 	 //  print_r(json_encode($articles,JSON_PRETTY_PRINT));
 	}
 
 	/**
@@ -35,7 +36,7 @@
 	/**
      * Store a newly created resource in storage.
      */
-	public function store(){
+	public function store(Request $request){
 
 		// url for redirect
 		$url = "articles/create";
@@ -44,9 +45,10 @@
 		$errors = [];
 		// 
 
-		$title = $_POST['title'];
-		$text =  $_POST['text'];
-		$csrf_token = $_POST['csrf_token'];
+		$title = $request->title;
+		$text =  $request->text;
+		$csrf_token = $request->csrf_token;
+
 
 		//xss defeat
 			$title = Defeat::xss_defeat($title);
@@ -93,7 +95,8 @@
 		$csrf_token = Defeat::csrf_defeat();
 
 		$object = Article::find($id);
-		// $object= $object;
+
+
 		$data = [
 			'csrf_token'=>$csrf_token,
 			'article'=>$object,
@@ -106,17 +109,17 @@
      * @param  array $form_data
      * @param  int  $id
      */
-	public function update($id){
+	public function update(Request $request,$id){
+
 		// url for redirect
-		$url = "articles/edit/".$id;
+		$url = "articles/".$id;
 
 		// Будем хранить ошибки
 		$errors = [];
 		// 
-
-		$title = $_POST['title'];
-		$text =  $_POST['text'];
-		$csrf_token = $_POST['csrf_token'];
+		$title = $request->title;
+		$text =  $request->text;
+		$csrf_token = $request->csrf_token;
 
 		//xss defeat
 			$title = Defeat::xss_defeat($title);
@@ -137,12 +140,12 @@
 		
 
 		$object = Article::find($id);
-		$result = $object->update([
-			'title'=>$title,
-			'text'=>$text
-		]);
 
 		if(!$errors){
+				$result = $object->update([
+				'title'=>$title,
+				'text'=>$text
+			]);
 			if($result){
 		  		Redirect::redirect($url,'article_update_success',"Articles was updated successfully");
 			}

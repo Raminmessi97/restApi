@@ -14,7 +14,7 @@
 
         <header class="main_header">
 			<div class="logo-of-site">
-              <a href="/php_projs/project2/">
+              <a href="<?php echo URL_MAIN;?>">
                 <img src="<?php echo URL_MAIN; ?>resources/images/site-icon.png" alt="site-icon" class="icon-site-img"/>
               </a> 
             </div>

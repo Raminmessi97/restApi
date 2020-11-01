@@ -20,63 +20,85 @@ use Cmd\Handlers\Handler;
 						}
 
 
-					$arrays_of_method = ['index','create','show','insert'];
+				$arrays_of_method = ['index','show','create','store','edit','update','delete'];
 
 
-
-					//delete existed methods
-
-					$classname = "\App\Http\Controllers\\".$filename;
+					$classname = "App\Http\Controllers";
 					
-					$controller = new $classname;
+$content = "<?php\n\r";
+$content.="namespace $classname\n\r";
+$content.='use App\Views\View;
+use App\Useful_funcs\Defeat;
+use App\Useful_funcs\Redirect;
+use App\Http\Request;';
+$content.="\n\r\n\rclass $filename{\n\r";
+$content.='/**
+	     * Display a listing of the resource.
+	     *
+	     */
+		public function index(){
+		}		
+		/**
+	     * Show the form for 
+	     * @param int $id
+	     */
+		public function show($id){
 
-					$existing_methods = new \ReflectionObject($controller);
+		}
 
-					// return print_r($existing_methods);
+		/**
+	     * Show the form for creating a new resource.
+	     *
+	     */
+		public function create(){
 
-					$methods = $existing_methods->getMethods();
+		}
 
-					$all_values = [];
+		/**
+	     * Store a newly created resource in storage.
+		 *@param Request $request;
+	     */
+		public function store(Request $request){
 
-					foreach($methods as $method)
-						$all_values[] = $method->name;
+		}
 
+		/**
+	     * Show the form for editing the specified resource.
+	     */
+		public function edit($id){
+			
+		}
 
-					foreach ($arrays_of_method as $key => $value) {
-						if(in_array($value, $all_values))
-							unset($arrays_of_method[$key]);
-					}
+		/**
+	     * Update the specified resource in storage.
+	     * @param  Request $request
+	     * @param  int  $id
+	     */
+		public function update(Request $request,$id){
+			
+		}
 
+		/**
+	     * Remove the specified resource from storage.
+	     *
+	     * @param  int  $id
+	     */
+	    public function delete($id)
+	    {
+	    	
+	   	}';
+	   $content.="\n\r}";
 
-
-
-					//end of delete block
-
-					$strike_two = "";
-					foreach($arrays_of_method as $method){
-						$strike_two.="\tpublic function ".$method."(){\n\r \t//body of ".$method."\n\r\t}\n\r\n\r";
-					}
 
 
 				
 					$fp = fopen('app/Http/Controllers/'.$filename.".php", 'w') or die("Создать файл не удалось");
 
-					$strike = implode("", $lines);
-					
-					$text = <<<_END
-					$strike
-					$strike_two
-					}
-					_END;
-
-					fwrite($fp, $text);
+					fwrite($fp, $content);
 					fclose($fp);
 
 					echo "\033[32m";
-					return "Method ".$value." was added to ".$filename."\033[33m \n";
-
-
-
+					return "Methods: ".implode(",",$arrays_of_method)." were added to ".$filename."\033[33m \n";
 				}
 				else
 					return parent::handle($key,$value,$filename);

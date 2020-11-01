@@ -85,11 +85,13 @@ class UserController{
 			$new_user->name = $name;
 			$new_user->email = $email;
 			$new_user->password = $password;
+
 			
 			if(!$errors){
 				if($new_user->create()){
+					$json_user = json_encode($new_user);
 					$success = "Пользователь был успешно создан";
-					setcookie('logged_user',$new_user->email,time()+3600,"/");
+					setcookie('logged_user',$json_user,time()+3600,"/");
 					Redirect::redirect($url_success,'user_create_success',$success);
 				}
 				else{
@@ -146,8 +148,9 @@ class UserController{
 
 		 if($user&&!$errors){
 		 	 if(password_verify($password, $user->password)){
+		 	 	$json_user = json_encode($user);
 			 	$success = "Успешная авторизация";
-				setcookie('logged_user',$user->email,time()+3600,"/");
+				setcookie('logged_user',$json_user,time()+3600,"/");
 			 	Redirect::redirect("","login_success",$success);
 			 }
 			 else {
