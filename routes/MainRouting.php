@@ -16,7 +16,7 @@ class MainRouting{
 		$method = Router::rest_method();
 
 		// data
-		if(preg_match("/put|delete|post/", $method))
+		if(preg_match("/put|post/", $method))
 			$request_data = Router::rest_request_data();
 		else 
 			$request_data = [];

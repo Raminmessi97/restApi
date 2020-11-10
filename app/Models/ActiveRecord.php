@@ -232,13 +232,13 @@ abstract class ActiveRecord {
      * @return $this
      */
 
-	public static function paginate($limit,$current_page){
+	public static function paginate($limit,$current_page,$added_url=""){
 		
 		$connect =  Database::getInstance();
 
 		$count = static::getCount();
 
-		$pagination = new Pagination($count,$limit,$current_page);
+		$pagination = new Pagination($count,$limit,$current_page,$added_url);
 		$html=$pagination->get_pag();
 
 		$offset = ($current_page-1)*$limit;

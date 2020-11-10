@@ -39,6 +39,7 @@
 					<input type="email" required="required" name="email" placeholder="Email">
 					<input type="password" required="required"  name="password" placeholder="Password">
 					<input type="submit" class="register-form-submit" value="Create">
+					<p>Есть аккаунт? <a href="<?php echo URL_MAIN; ?>login">Авторизоваться</a></p>
 				</form>
 	</div>
 		

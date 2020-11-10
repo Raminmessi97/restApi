@@ -38,6 +38,7 @@
 					<input type="email" required="required" name="email" placeholder="Email">
 					<input type="password" required="required"  name="password" placeholder="Password">
 					<input type="submit" class="register-form-submit" value="Login">
+					<p>Нет аккаунта? <a href="<?php echo URL_MAIN; ?>register">Регистрация</a></p>
 				</form>
 	</div>
 		

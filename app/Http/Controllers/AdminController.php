@@ -10,7 +10,8 @@ class AdminController extends Controller{
 
 	// contruct
  public function __construct(){
-    return $this->middleware(['auth','admin'], ['except'=>['index','show']]); // 1-ый вариант
+ 	return $this->middleware(['auth','admin']); // 1-ый вариант - ко всем action-ам
+    // return $this->middleware(['auth','admin'], ['except'=>['show']]); // 1-ый вариант
     // return $this->middleware(['auth','admin'], ['only'=>['create']]); //2-ый вариант
  	// return $this->middleware(['auth','admin'])->only(['create']); //3-ий вариант
  	// return $this->middleware(['auth','admin'])->except(['index','show']); 4-ый вариант
@@ -22,7 +23,7 @@ class AdminController extends Controller{
 	     *
 	     */
 		public function index(){
-			echo "Admin.index";
+			View::view("admin/index",[]);
 		}		
 		
 		/**

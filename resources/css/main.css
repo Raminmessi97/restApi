@@ -170,6 +170,7 @@ main{
 article{
   flex-basis: 66.4%;
   padding:15px;
+
 }
 
 
@@ -255,12 +256,29 @@ footer {
 
 /*admin articles*/
 
+#admin_panel{
+  padding:30px 50px;
+}
+.admin_deleted_art{
+  position: fixed;
+  font-size: 20px;
+  top:3%;
+  right:2%;
+  background-color: #eb4444;
+  color:white;
+  transition: opacity 1.5s;
+  z-index: 2;
+  padding:17px;
+  border-radius: 10px;
+}
+
+
+
 #table_articles {
   border-collapse: collapse;
   width: 100%;
 }
 
-#table_articles tr:nth-child(even){background-color: #f2f2f2;}
 
 #table_articles tr:hover {background-color: #ddd;}
 
@@ -270,10 +288,22 @@ footer {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
-  background-color: #4CAF50;
+  background-color: #53785D;
   color: white;
 }
 
+#update_article{
+  display: inline-block;
+  padding:6px;
+  color:white;
+  border:1px solid white;
+  text-decoration: none;
+  border-radius: 6px;
+}
+#update_article:hover{
+  background-color: #fcba03;
+  color:#756d56;
+}
 
 #delete_article{
 	display: inline-block;
@@ -284,8 +314,66 @@ footer {
 	border-radius: 6px;
 }
 #delete_article:hover{
-	background-color: red;
+	background-color: #f22000;
 	color:white;
+}
+
+
+.main_header{
+  display: flex;
+  flex-grow: 1;
+  padding:10px 20px;
+}
+
+.admin_to_mainpage{
+  display: flex;
+  flex-grow: 1;
+}
+
+.admin_to_mainpage a{
+  color:white;
+}
+
+.admin_can_do{
+   display: flex;
+  flex-grow: 1;
+}
+
+
+
+.admin_can_do a{
+  display: inline-block;
+  text-decoration: none;
+  color:white;
+  padding:5px 10px;
+  border:1px solid white;
+  border-radius: 10px;
+  margin:4px;
+}
+
+.admin_can_do a:hover{
+  background-color: green;
+}
+
+.admin_logout{
+  display: flex;
+  flex-grow: 1;
+}
+
+.admin_logout a i{
+  font-size: 40px;
+  color:white;
+}
+.admin_logout a i:hover{
+  color:#eb4034;
+}
+
+.main_header a{
+  text-decoration: none;
+
+}
+.main_header li{
+  list-style-type: none;
 }
 
 
@@ -355,7 +443,7 @@ footer {
 /**/
 
 
-/*register*/
+/*login-register*/
 .div-register-form{
   display:flex;
   justify-content: center;
@@ -369,7 +457,7 @@ footer {
   justify-content: center;
   padding:25px 45px;
   box-shadow: 0px 2px 23px -5px rgba(199,109,199,1);
-  background-color: #9BD065;
+  background-color: #c7d190;
 }
 
 
@@ -377,24 +465,40 @@ footer {
   border-radius: 2px;
   display: block;
   padding:15px;
-  color:#FCFFFB;
+  color:#53544a;
 }
 
 .register-form input{
   border-radius: 2px;
   display: block;
-  padding:5px;
+  padding:8px;
   line-height: 20px;
   outline: none;
   border:none;
   margin:10px;
-  /*color:#11270A;*/
+  width: 100%;
+  font-size: 16px;
   box-shadow: 0px 2px 23px -5px rgba(199,109,199,1);
 }
 
+.register-form p{
+  font-size: 16px;
+  color:#4d5c53;
+}
+.register-form p a{
+  text-decoration: none;
+  font-size: 20px;
+  color:#4d5c53;
+}
+.register-form p a:hover{
+  color:green;
+}
+
+
 .register-form-submit{
-  background-color:#214915;
-  color:#A8D899;
+  background-color:#59b57f;
+  color:black;
+  font-weight: bold;
   cursor: pointer;
 }
 
@@ -787,3 +891,46 @@ font-size: 25px;
   font-size: 16px;
 }
 /**/
+
+
+
+/*my version of ckeditor*/
+
+#my_ckeditor{
+  /*background-color: red;*/
+}
+
+.ckeditor_header{
+  background-color: #e1f2dc;
+}
+.ckeditor_body{
+  border:1px solid grey;
+   background-color: #a8b5a5;
+}
+#ckeditor_textarea{
+  width: 100%;
+}
+
+/**/
+
+
+
+
+/*for test*/
+
+.items-list {
+  list-style-type: none;
+  background-color: grey;
+  font-size: 40px;
+}
+
+.positive{
+  color:green;
+}
+
+.negative{
+  color:red;
+}
+
+/**/
+

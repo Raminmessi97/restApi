@@ -89,6 +89,7 @@ class UserController{
 			
 			if(!$errors){
 				if($new_user->create()){
+					$new_user->admin = 0;
 					$json_user = json_encode($new_user);
 					$success = "Пользователь был успешно создан";
 					setcookie('logged_user',$json_user,time()+3600,"/");
@@ -148,7 +149,13 @@ class UserController{
 
 		 if($user&&!$errors){
 		 	 if(password_verify($password, $user->password)){
-		 	 	$json_user = json_encode($user);
+		 	 	if($user->isAdmin()){
+				    $user->admin = 1;
+				 }else
+				 $user->admin = 0;
+
+				 $json_user = json_encode($user);
+
 			 	$success = "Успешная авторизация";
 				setcookie('logged_user',$json_user,time()+3600,"/");
 			 	Redirect::redirect("","login_success",$success);

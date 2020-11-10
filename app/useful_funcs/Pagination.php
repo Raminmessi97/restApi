@@ -7,9 +7,8 @@ class Pagination {
 	private $amount;
 	private $max_in_one_page;
 	private $current_page;
-	private $url;
 	private $html;
-	private $prefix = "page-";
+	private $prefix="page-";
 	private $last_page;
 
 
@@ -18,7 +17,7 @@ class Pagination {
 		$this->amount = $amount;
 		$this->max_in_one_page = $max_in_one_page;
 		$this->current_page = $current_page;
-		$this->url = URL_MAIN;
+
 	}
 
 

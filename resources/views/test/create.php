@@ -3,11 +3,8 @@
 <main class="content">
 
     <article>
-		<form action="<?php echo URL_MAIN ?>test/store" method="post">
-			<input type="text" name="title" placeholder="Title of article" required="required">
-			<input type="textarea" name="text" placeholder="Text of article" required="required">
-			<input type="submit" value="Create">
-		</form>
+		
+		<div id="my_ckeditor"></div>
 
 	</article>
 

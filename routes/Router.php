@@ -178,7 +178,7 @@ class Router{
 						$hasRoute = true; //Нашли совпадение
 						if($value['middlewares'])
 						{
-							self::use_middlewares($value,$matches);
+							self::use_middlewares($value,$matches,$request_data);
 						}
 						else{
 							self::check($value['ContAct'],$matches,$request_data);
@@ -260,7 +260,7 @@ class Router{
      *
      * @param null
      */
-	private static function use_middlewares($value,$matches){
+	private static function use_middlewares($value,$matches,$request_data){
 		$middlewares = $value['middlewares'];
 
 		
@@ -301,7 +301,7 @@ class Router{
 				$run_middlewares = new $uses_middlewares[0];
 				
 				if($run_middlewares->check($author,$author_list)){
-					self::check($value['ContAct'],$matches);
+					self::check($value['ContAct'],$matches,$request_data);
 				}
 				else
 					{
@@ -328,7 +328,7 @@ class Router{
 
 
 			if($first_handler->check($author,$author_list)){
-				self::check($value['ContAct'],$matches);
+				self::check($value['ContAct'],$matches,$request_data);
 			}
 			else{
 				$url = "";
@@ -356,11 +356,14 @@ class Router{
 			}
 				$used_methods = $all_methods;
 		}
-
-		if($object->middlewares['only']){
+		else if($object->middlewares['only']){
 			$only_methods = $object->middlewares['only'];
 			$used_methods = $only_methods;
 		}
+		else{
+			$used_methods = $all_methods;
+		}
+
 
 
 		$urls = [

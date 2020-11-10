@@ -14,6 +14,7 @@
      *
      */
 	public function index(){
+		echo "articles index";
 	  // header('Content-Type: application/json');
  	 //  $object = Article::getInstance();
  	 //  $articles = $object->findAll()->get();
@@ -47,6 +48,8 @@
 
 		$title = $request->title;
 		$text =  $request->text;
+		$image = "http://localhost/php_projs/project2/resources/images/films1.jpg";
+		$category_id = 10;
 		$csrf_token = $request->csrf_token;
 
 
@@ -55,10 +58,10 @@
 			$text = Defeat::xss_defeat($text);
 		// 
 
-		if(!preg_match("/^[a-zA-Z0-9\s\.]{10,}$/",$title)){
+		if(!preg_match("/^[a-zA-Z0-9а-яёА-ЯЁ\s\.\-]{10,}$/u",$title)){
 			$errors[] = "Тайтл слишком короткий";
 		}
-		if(!preg_match("/^[a-zA-Z0-9\s\.]{20,}$/", $text)){
+		if(!preg_match("/^[a-zA-Z0-9а-яёА-ЯЁ\s\.\-]{20,}$/u", $text)){
 			$errors[] = "Текст слишком короткий";
 		}
 
@@ -71,7 +74,9 @@
 		$object = Article::getInstance();
 		$object->title = $title;
 		$object->text = $text;
-
+		$object->image = $image;
+		$object->category_id = $category_id;
+		
 		if(!$errors){
 			if($object->create()){
 		  Redirect::redirect($url,'article_create_success',"Articles was created successfully");
@@ -126,10 +131,10 @@
 			$text = Defeat::xss_defeat($text);
 		// 
 
-		if(!preg_match("/^[a-zA-Z0-9\s\.]{10,}$/",$title)){
+		if(!preg_match("/^[a-zA-Z0-9а-яёА-ЯЁ\s\.\-]{10,}$/u",$title)){
 			$errors[] = "Тайтл слишком короткий";
 		}
-		if(!preg_match("/^[a-zA-Z0-9\s\.]{20,}$/", $text)){
+		if(!preg_match("/^[a-zA-Z0-9а-яёА-ЯЁ\s\.\-]{20,}$/u", $text)){
 			$errors[] = "Текст слишком короткий";
 		}
 

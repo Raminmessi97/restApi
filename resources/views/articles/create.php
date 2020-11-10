@@ -39,10 +39,11 @@
 
 
 
-
+	 <div id="new_article_create"></div>
+	 
 		<form action="<?php echo URL_MAIN ?>articles/store" method="post">
 			<input type="hidden" required="required" name="csrf_token" value="<?php echo $csrf_token; ?>" >
-			<input type="text" name="title" placeholder="Title of article" required="required">
+			<textarea name="title" id="my_ckeditor" placeholder="Title of article" required="required"></textarea>
 			<input type="textarea" name="text" placeholder="Text of article" required="required">
 			<input type="submit" value="Create">
 		</form>

@@ -32,12 +32,18 @@
 
             <div class="search-login">
 
-                <?php if(isset($_COOKIE['logged_user'])){?>
+                <?php if(isset($_COOKIE['logged_user'])){
+                    $user = json_decode($_COOKIE['logged_user']);
+                    $admin = $user->admin;
+                    ?>
                     <a href="#" class="show_user_settings">User</a>
                     
                     <div class="user-settings modal-hidden"> 
                         <li><a href="<?php echo URL_MAIN; ?>user/cabinet">Cabinet</a></li>
                         <li><a href="<?php echo URL_MAIN; ?>user/logout">Logout</a></li>
+                        <?php if($admin){?>
+                             <li><a href="<?php echo URL_MAIN; ?>pelagus">Admin Panel</a></li>
+                        <?php }?>
                     </div>
 
 

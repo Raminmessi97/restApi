@@ -9,7 +9,7 @@ Router::get('page-([0-9]+)',"MainController@main");
 
 // For articles
 Router::get("articles","ArticleController@index");
-Router::get("articles/create","ArticleController@create")->middleware(['auth']);
+Router::get("articles/create","ArticleController@create")->middleware(['auth','admin']);
 Router::post("articles/store","ArticleController@store");
 Router::get("articles/([0-9]+)","ArticleController@edit");
 Router::put("articles/([0-9]+)","ArticleController@update");
@@ -27,6 +27,13 @@ Router::get("user/logout","UserController@user_logout");
 
 
 // Admin Panel
-Router::resource("admin","AdminController");
+Router::resource("pelagus","AdminController");
+Router::get("pelagus/page-([0-9])","AdminController@index");
 
 
+
+
+// test ckeditor
+Router::get("my_ckeditor","MainController@ckeditor");
+Router::post("my_ckeditor/post_image","MainController@post_image");
+Router::post("my_ckeditor/get_data","MainController@get_data");

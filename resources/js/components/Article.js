@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from "axios";
-
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCoffee } from '@fortawesome/free-solid-svg-icons'
+import Ckeditor_Settings from "./Ckeditor/Ckeditor_Settings";
 
 export default class Article extends React.Component {
 
@@ -10,45 +11,11 @@ export default class Article extends React.Component {
  	constructor(){
  		super();
  		this.state = {
- 			data: []
+ 			// data: []
  		}
 
  	}
 
-    //do renderinqa 
- 	UNSAFE_componentWillMount(){
- 		let  $this = this;
-
- 		axios.get('api/articles').then(response => {
-
-		$this.setState({
-			data:response.data
-		})
-
- 		}).catch(error =>{
- 			console.log(error)
- 		})
-
-
- 	}
-
-
-//delete article
-    deleteArticle(article){
-        console.log(article)
-        var $this =this
-        axios.delete('article/delete/'+article.id).then(response =>  {
-            console.log(response)
-
-             const newState = $this.state.data.slice();
-		        newState.splice(newState.indexOf(article),1)
-		        $this.setState({
-		            data:newState
-		        })
-	        }).catch(error => {
-	            console.log(error)
-	        })
-	    }
 
 
 
@@ -57,42 +24,13 @@ export default class Article extends React.Component {
     render(){
     return (
         <div>
-            <h1>Article List</h1>
-            <table id="table_articles">
-            <thead>
-            	<tr>
-            		<th>ID</th>
-            		<th>TITLE</th>
-            		<th>TEXT</th>
-            		<th>ACTION</th>
-            	</tr>
-            </thead>
-
-            <tbody>
-            	
-	        	 {this.state.data.map((article, index) => (
-	        	 	<tr key={index}>
-		        	 	<th>{article.id}</th>
-		        	 	<th>{article.title}</th>
-		        	 	<th>{article.text}</th>
-		        	 	<th>
-		        	 	<a href="#" id="delete_article" onClick={this.deleteArticle.bind(this,article)}>Delete</a>
-		        	 	</th>
-	        	 	</tr>
-                ))}
-
-	        	 
-	       </tbody>
-
-	      	</table>
-
-
+        <Ckeditor_Settings/>
         </div>
 
     );
   }
 }
 
-if(document.getElementById("articles")){
-	ReactDOM.render(<Article/>,document.getElementById("articles"));
+if(document.getElementById("my_ckeditor")){
+	ReactDOM.render(<Article/>,document.getElementById("my_ckeditor"));
 }

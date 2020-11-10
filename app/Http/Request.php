@@ -20,10 +20,10 @@ class Request {
       	}
 
       	$object = new Request();
-		foreach ($result as $key => $value)
-		{
-		    $object->$key = $value;
-		}
+    		foreach ($result as $key => $value)
+    		{
+    		    $object->$key = $value;
+    		}
 
       	return $object;
 

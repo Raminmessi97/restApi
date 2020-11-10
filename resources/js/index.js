@@ -2,8 +2,9 @@ import axios from "axios";
 window._ = require('lodash');
 
 
-// import Test2 from "./components/Tests2";
-// import Article from "./components/articles/Article";
+// import Admin from "./components/Admin";
+// import Article from "./components/Article";
+import App from "./components/App";
 
 
 try {

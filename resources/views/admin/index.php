@@ -1,9 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>title</title>
-    <meta charset="utf-8">
-</head>
-<body>
-</body>
-</html>
+<?php require_once("resources/views/admin/layouts/header.php")?>
+
+<main class="content">
+
+
+    	<div id="admin_panel"></div>
+
+
+</main>
+
+<?php require_once("resources/views/admin/layouts/footer.php")?>
+
+
+
+
