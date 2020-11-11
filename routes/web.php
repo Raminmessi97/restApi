@@ -30,6 +30,10 @@ Router::get("user/logout","UserController@user_logout");
 Router::resource("pelagus","AdminController");
 Router::get("pelagus/page-([0-9])","AdminController@index");
 
+//
+
+Router::get("category/([a-zA-Z]+)","ArticleController@category_articles");
+
 
 
 

@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import WalletStore from "./store/walletStore";
 
 
-class ItemsList extends Component {
+class ItemsList extends React.Component {
    
     constructor(props) {
         super(props);

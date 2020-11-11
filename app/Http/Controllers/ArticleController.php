@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;	
 use App\Models\Article;
+use App\Models\Category;
 use App\Views\View;
 use App\Useful_funcs\Defeat;
 use App\Useful_funcs\Redirect;
@@ -19,6 +20,23 @@
  	 //  $object = Article::getInstance();
  	 //  $articles = $object->findAll()->get();
  	 //  print_r(json_encode($articles,JSON_PRETTY_PRINT));
+	}
+
+
+	 /**
+     * Display a category articles
+     *@param string $category_name
+     */
+	public function category_articles($category_name){
+		$object = Category::getInstance();
+		$get_category = $object->findAll()->where("route_name","=",$category_name)->get();
+		$id = $get_category->id;
+
+		
+
+
+
+		// $articles = $object->findAll()->where()
 	}
 
 	/**

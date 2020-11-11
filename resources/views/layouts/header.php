@@ -50,8 +50,10 @@
               <?php } ?>
 
                 <?php if(!isset($_COOKIE['logged_user'])){?>
-                    <a href="<?php echo URL_MAIN; ?>login">Login</a>
-                    <a href="<?php echo URL_MAIN; ?>register">Register</a>
+                    <div class="login-register">
+                        <a href="<?php echo URL_MAIN; ?>login">Login</a>
+                        <a href="<?php echo URL_MAIN; ?>register">Register</a>
+                     </div>
               <?php } ?>
             </div>
 		</header>

@@ -84,10 +84,7 @@ abstract class ActiveRecord {
 		$params = [];
 
 		$result = $connect->query($sql,$params,static::class);
-		if($result)
-			return $result;
-		else 
-			return false;
+		return $result;
 	}
 
 
@@ -117,10 +114,7 @@ abstract class ActiveRecord {
 		$params = ["id"=>$id];
 
 		$result = $connect->query($sql,$params,static::class);
-		if($result)
-			return $result[0];
-		else 
-			return false;
+		return $result;
 
 	}
 

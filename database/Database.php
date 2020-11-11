@@ -58,8 +58,20 @@ class Database{
 		$stmt = $this->connection_to_db->prepare($sql);
 		$stmt->execute($params);
 
-		$result = $stmt->fetchAll(\PDO::FETCH_CLASS,$class);
-		return $result;
+    $count = $stmt->rowCount();
+    $result = $stmt->fetchAll(\PDO::FETCH_CLASS,$class);
+
+      if($count>1){
+  		  return $result;
+      }
+
+      else if($count==1){
+        return $result[0];
+      }
+      else{
+        return $count;
+      }
+		
 	}
 
 
