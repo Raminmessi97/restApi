@@ -12,13 +12,8 @@
         <header class="main_header">
             <div class="admin_to_mainpage">
                  <a href="<?php echo URL_MAIN;?>">
-                <h1>Main Page</h1>
-            </a>
-            </div>
-
-            <div class="admin_can_do">
-                <a class="admin_create_article" href="<?php echo URL_MAIN; ?>admin">All articles</a>
-                <a class="admin_create_article" href="<?php echo URL_MAIN; ?>articles/create">New create</a>
+                    <h1>Main Page</h1>
+                 </a>
             </div>
 
             <div class="admin_logout">

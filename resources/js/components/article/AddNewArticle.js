@@ -15,8 +15,11 @@ export default class AddNewArticle extends Component{
 		this.state = {
 			article:this._getFreshArticle(),
 			csrf_token: Cookies.get('csrf_token'),
+			article_create_form_status:false,
+
 			article_create_error_status:false,
 			article_create_success_status:false
+
 		}
 	}
 
@@ -35,6 +38,7 @@ export default class AddNewArticle extends Component{
 		if(response.errors){
 			this.setState({
 				article_create_errors :response.errors,
+				article_create_form_status:false,
 				article_create_error_status:true,
 			})
 			setTimeout(() => {
@@ -47,6 +51,7 @@ export default class AddNewArticle extends Component{
 		if(response.success){
 			this.setState({
 				article_create_successes :response.success,
+				article_create_form_status:false,
 				article_create_success_status:true
 			})
 			setTimeout(() => {
@@ -94,6 +99,17 @@ export default class AddNewArticle extends Component{
 		})
 	}
 
+	ShowForm(event){
+		this.setState({
+			article_create_form_status:true
+		})
+	}
+	HideForm(event){
+		this.setState({
+			article_create_form_status:false
+		})
+	}
+
 
 	_AddNewArticle(event){
 		event.preventDefault();
@@ -130,12 +146,11 @@ export default class AddNewArticle extends Component{
 		return(
 			<div className="admin_add_new_article">
 
-			 <div className={`admin_deleted_art  ${this.state.article_create_error_status?"show_block":"hide_block"}`  }>
+			<div className={`admin_deleted_art  ${this.state.article_create_error_status?"show_block":"hide_block"}`  }>
 	          {this.state.article_create_errors?this.state.article_create_errors.map((error,index) =>(
 	          	<li key={index}>{error}</li>
 	          )):null}
 	        </div>	
-
 
 	        <div className={`admin_create_article_success  ${this.state.article_create_success_status?"show_block":"hide_block"}`  }>
 	        	{this.state.article_create_successes?this.state.article_create_successes.map((success,index) =>(
@@ -143,19 +158,24 @@ export default class AddNewArticle extends Component{
 	          )):null}
 	        </div>	
 
-				<h2>Add new article </h2>
-				<form onSubmit={this._AddNewArticle.bind(this)}>
-					<input type="text" placeholder="Title" onChange={this.TitleChanger.bind(this)}/>
-					<input type="text" placeholder="Text" onChange={this.TextChanger.bind(this)}/>
-					<input type="file" onChange={this.FileChanger.bind(this)}/>
-					<select onChange={this.CategoryChanger.bind(this)}>
-						{this.state.categories?this.state.categories.map((category , index) =>(
-						   <option key={index} value={category.id}>{category.name}</option>
-						)):null}
-					</select>
-
-					<button type="submit">Create</button>
-				</form>
+				<button className="show_hide_art_crt" onClick={this.ShowForm.bind(this)}>Create article</button>
+				<div className={this.state.article_create_form_status?"admin_create_art_form show_block":"hide_block"}>
+				  <div className="admin_cr_form_wrap">
+				   <span onClick={this.HideForm.bind(this)} className="close">&times;</span>
+				  	<form className="admin_create_form" onSubmit={this._AddNewArticle.bind(this)}>
+						<input type="text" placeholder="Title" onChange={this.TitleChanger.bind(this)}/>
+						<input type="text" placeholder="Text" onChange={this.TextChanger.bind(this)}/>
+						<label htmlFor="form_admin_image">Upload article's image</label>
+						<input type="file" id="form_admin_image" onChange={this.FileChanger.bind(this)}/>
+						<select onChange={this.CategoryChanger.bind(this)}>
+							{this.state.categories?this.state.categories.map((category , index) =>(
+							   <option key={index} value={category.id}>{category.name}</option>
+							)):null}
+						</select>
+						<button type="submit" id="admin_create_button">Create</button>
+					</form>
+				  </div>
+				</div>
 			</div>
 		)
 	}
