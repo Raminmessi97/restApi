@@ -113,7 +113,7 @@ abstract class ActiveRecord {
 		$sql = "SELECT * FROM ".static::getTableName()." WHERE id=:id";
 		$params = ["id"=>$id];
 
-		$result = $connect->query($sql,$params,static::class);
+		$result = $connect->queryOne($sql,$params,static::class);
 		return $result;
 
 	}

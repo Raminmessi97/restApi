@@ -9,26 +9,17 @@ class ArticleList extends React.Component{
 
 		this.state = {
 			articles: [],
-			art_delete_suc_state:true
+			art_delete_suc_state:false
 		}
 
 
 		this._onChange = this._onChange.bind(this)
+		this._onDelete = this._onDelete.bind(this)
 	}
 
 	_deleteArticle(article){
-		AdminActions.removeArticle(article)
-
-			this.setState({
-                art_delete_suc_state: !this.state.art_delete_suc_state
-	        })
-
-            setTimeout(() => {
-                 this.setState({
-                     art_delete_suc_state: !this.state.art_delete_suc_state
-                 })
-            }, 1500);
-		}
+		AdminActions.removeArticle(article.id)
+	}
 
 
 	_onChange(){
@@ -37,8 +28,24 @@ class ArticleList extends React.Component{
 	    });
 	}
 
+	_onDelete(){
+		this.setState({
+			article_delete_response: AdminStore.getArticleDeleteResponses(),
+			art_delete_suc_state: true
+		})
+
+        setTimeout(() => {
+         this.setState({
+             art_delete_suc_state: false
+         })
+         AdminActions.setInitialData();
+        }, 2500);
+
+	}
+
 	UNSAFE_componentWillMount(){
 		AdminStore.addChangeListener(this._onChange)
+		AdminStore.addArticlDeleteListener(this._onDelete)
 	}
 
 	componentDidMount(){
@@ -47,6 +54,7 @@ class ArticleList extends React.Component{
 
 	ComponentWillUnmount(){
 		AdminStore.removeChangeListener(this._onChange)
+		AdminStore.removeArticlDeleteListener(this._onDelete)
 	}
 
 
@@ -59,8 +67,8 @@ class ArticleList extends React.Component{
 
 		return(
 			<div>
-				<div className={`admin_deleted_art  ${this.state.art_delete_suc_state?"hide_block":"show_block"}`  }>
-		            <p>Article was deleted successfully!</p>
+				<div className={`admin_deleted_art  ${this.state.art_delete_suc_state?"show_block":"hide_block"}`  }>
+		            <p>{this.state.article_delete_response?this.state.article_delete_response:null}</p>
 		         </div>
 
             <table id="table_articles">

@@ -42,22 +42,21 @@ class ArticleController {
          *
          * @param  int  $id
          */
-        public function delete(int $id)
-        {
-               if(Article::find($id)){
-                    $article = Article::find($id);
-                    $result = $article->delete();
-
-                    if($result){
-                        echo "Article with id=".$id." was deleted successfully";
-                    }
-                    else
-                        echo "Error during deleting article with id=".$id;
-             }
-             else{
-                echo "This article hasn't found";
-             }
+    public function delete(int $id){
+        if(Article::find($id)){
+            $article = Article::find($id);
+            $result = $article->delete();
+            if($result){
+                echo "Article with id=".$id." was deleted successfully";
+            }
+            else{
+               echo  "Error during deleting article with id=".$id; 
+            }
         }
+         else{
+           echo "This article hasn't found";
+         }
+    }
 
 
     public function store(Request $request){

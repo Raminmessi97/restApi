@@ -19,7 +19,7 @@
 		$article = Article::find($id);
 
 		$data =  [
-			'article'=>$article[0]
+			'article'=>$article
 		];
 
 		View::view("articles/index",$data);

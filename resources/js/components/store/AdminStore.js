@@ -11,6 +11,7 @@ import AdminConstants from '../constants/AdminConstants';
     var _data = [];
     var _categories = [];
     var _responses = [];
+    var _article_delete_response = [];
 
     function setArticles(articles){
        _data = articles
@@ -22,6 +23,10 @@ import AdminConstants from '../constants/AdminConstants';
 
     function addNewArticle(responses){
        _responses = responses
+    }
+
+    function deleteArticle(response){
+       _article_delete_response = response
     }
 
 class AdminStore extends EventEmitter{
@@ -48,8 +53,9 @@ class AdminStore extends EventEmitter{
                 this.emit(RESPONSE_GET)
                 break;
 
-              case AdminConstants.DELETE_ARTICLE:
-               this._deleteArticle(action.payload)
+              case AdminConstants.REMOVE_ARTICLE:
+               deleteArticle(action.payload)
+               this.emit(REMOVE)
                 break;
 
             default:
@@ -71,13 +77,10 @@ class AdminStore extends EventEmitter{
         return _responses;
     }
 
-
-
-    _deleteArticle(article){
-        _data = _data.splice(_data.indexOf(article),1);
-            //Вызываем событие change
-        // this.emit(REMOVE)
+    getArticleDeleteResponses(){
+        return _article_delete_response;
     }
+
 
 
     addChangeListener(callback){
@@ -102,6 +105,14 @@ class AdminStore extends EventEmitter{
 
     removeResponseGetListener(callback){
         this.removeListener(RESPONSE_GET,callback)
+    }
+
+    addArticlDeleteListener(callback){
+        this.on(REMOVE,callback)
+    }
+
+    removeArticlDeleteListener(callback){
+        this.removeListener(REMOVE,callback)
     }
 
 }

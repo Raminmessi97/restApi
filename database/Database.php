@@ -70,6 +70,21 @@ class Database{
 		
 	}
 
+    public function queryOne($sql,$params=[],$class='stdClass'){
+      $stmt = $this->connection_to_db->prepare($sql);
+      $stmt->execute($params);
+
+      $count = $stmt->rowCount();
+      $result = $stmt->fetchAll(\PDO::FETCH_CLASS,$class);
+
+      if($count==1){
+        return $result[0];
+      }
+      else{
+        return $count;
+      }
+  }
+
 
 
     /**

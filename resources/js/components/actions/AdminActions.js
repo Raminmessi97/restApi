@@ -39,10 +39,14 @@ class AdminActions{
 		})
 	}
 
-	removeArticle(article){
-		AdminDispatcher.dispatch({
-			actionType:AdminConstants.REMOVE_ARTICLE,
-			payload:article
+	removeArticle(article_id){
+		axios.delete('/php_projs/phenomenon/api/articles/'+article_id).then(response => {
+			AdminDispatcher.dispatch({
+				actionType:AdminConstants.REMOVE_ARTICLE,
+				payload:response.data
+			})
+		}).catch(error => {
+			console.log(error)
 		})
 	}
 
