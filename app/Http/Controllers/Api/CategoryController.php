@@ -1,42 +1,26 @@
 <?php
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 use App\Views\View;
 use App\Useful_funcs\Defeat;
 use App\Useful_funcs\Redirect;
 use App\Http\Request;
-use App\Http\Controller;
-
-class AdminController extends Controller{
-
-	// contruct
- public function __construct(){
- 	return $this->middleware(['auth','admin']); // 1-ый вариант - ко всем action-ам
-    // return $this->middleware(['auth','admin'], ['except'=>['show']]); // 1-ый вариант
-    // return $this->middleware(['auth','admin'], ['only'=>['create']]); //2-ый вариант
- 	// return $this->middleware(['auth','admin'])->only(['create']); //3-ий вариант
- 	// return $this->middleware(['auth','admin'])->except(['index','show']); 4-ый вариант
-}
-
-
-		/**
+use App\Models\Category;
+use App\Useful_funcs\NiceOutput;
+class CategoryController{
+/**
 	     * Display a listing of the resource.
 	     *
 	     */
 		public function index(){
-
-			$csrf_token = Defeat::csrf_defeat();
-
-			setcookie("csrf_token",$csrf_token,time()+3600,"/"); 
-
-			View::view("admin/index",[]);
+			$categories = Category::getAll();
+			echo(NiceOutput::getNiceJson($categories));
 		}		
-		
 		/**
-	     * Show data with id=$id
+	     * Show the form for 
 	     * @param int $id
 	     */
 		public function show($id){
-			echo "Admin.show".$id;
+
 		}
 
 		/**
@@ -44,7 +28,7 @@ class AdminController extends Controller{
 	     *
 	     */
 		public function create(){
-			echo "admin.create";
+
 		}
 
 		/**
@@ -59,7 +43,7 @@ class AdminController extends Controller{
 	     * Show the form for editing the specified resource.
 	     */
 		public function edit($id){
-			echo "admin.edit".$id;
+			
 		}
 
 		/**

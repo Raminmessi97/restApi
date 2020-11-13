@@ -4,9 +4,9 @@ use Router\Router;
 
 
 Router::get("api/articles","Api\ArticleController@index");
-Router::get("api/page_articles/([0-9]+)","Api\ArticleController@page_articles");
-Router::get("api/articles/([0-9]+)","Api\ArticleController@edit");
+// Router::get("api/page_articles/([0-9]+)","Api\ArticleController@page_articles");
+Router::post("api/articles/store","Api\ArticleController@store");
+
 Router::delete("api/articles/([0-9]+)","Api\ArticleController@delete");
 
-
-Router::post("api/testData","Api\ArticleController@testData");
+Router::get("api/categories","Api\CategoryController@index");

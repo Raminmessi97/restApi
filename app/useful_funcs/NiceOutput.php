@@ -12,7 +12,7 @@ class NiceOutput {
 
      public static function getNiceJson($data){
      	 header('Content-Type: application/json');
-     	 $data = json_encode($data,JSON_PRETTY_PRINT);
+     	 $data = json_encode($data,JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);
      	 return $data;
      }
 

@@ -272,6 +272,28 @@ footer {
   border-radius: 10px;
 }
 
+.admin_deleted_art li{
+  list-style-type: none;
+}
+
+
+
+.admin_create_article_success{
+  position: fixed;
+  font-size: 20px;
+  top:3%;
+  right:2%;
+  background-color: green;
+  color:white;
+  transition: opacity 1.5s;
+  z-index: 2;
+  padding:17px;
+  border-radius: 10px;
+}
+.admin_create_article_success li{
+  list-style-type: none;
+}
+
 
 
 #table_articles {
@@ -629,6 +651,37 @@ flex-direction: column;
 }
 
 
+
+/**/
+
+
+
+/*one_article*/
+.one_article{
+  display: flex;
+  flex-direction: column;
+}
+
+.nice_border{
+  border-radius: 4px;
+  -webkit-box-shadow: 2px 2px 19px -7px rgba(0,0,0,1);
+  -moz-box-shadow: 2px 2px 19px -7px rgba(0,0,0,1);
+  box-shadow: 2px 2px 19px -7px rgba(0,0,0,1);
+  padding:10px 20px;
+  margin:20px;
+}
+
+.one_article_title{
+ 
+}
+
+.one_article_text{
+ 
+}
+
+.one_article_comment{
+  
+}
 
 /**/
 

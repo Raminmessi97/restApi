@@ -60,7 +60,71 @@ class ArticleController {
         }
 
 
-        public function testData(Request $request){
-            print_r($request);
+    public function store(Request $request){
+        // Будем хранить errors и successes
+        $errors['errors'] = [];
+        $successes['success'] =[];
+        // 
+
+        $title = $request->title;
+        $text =  $request->text;
+        $category_id = $request->category;
+        $csrf_token = $request->csrf_token;
+        $file = $request->files;
+
+
+        //xss defeat
+            $title = Defeat::xss_defeat($title);
+            $text = Defeat::xss_defeat($text);
+        // 
+
+        if(!preg_match("/^[a-zA-Z0-9а-яёА-ЯЁ\s\.\-\,]{10,}$/u",$title)){
+            $errors['errors'][] = "Тайтл слишком короткий";
+        }
+        if(strlen($text)<20){
+            $errors['errors'][] = "Текст слишком короткий";
+        }
+
+        if($_SESSION['csrf_token']!==$csrf_token){
+            $errors['errors'][] = "CSRF ATTACK";
+        }
+
+        $uploaded_url = PROJECT_ROOT."resources/images/";
+        if(!$errors['errors']){
+                if($file['file'])
+                {
+                   $avatar_name = $_FILES["file"]["name"];
+                   $avatar_tmp_name = $_FILES["file"]["tmp_name"];
+
+                   $image = URL_MAIN."resources/images/".$avatar_name;
+                   $error = $_FILES["file"]["error"];
+
+                   if(move_uploaded_file($avatar_tmp_name, $uploaded_url.$avatar_name))
+                     $successes['success'][] = "Image was uploaded successfully";
+                   else
+                    $errors['errors'][] = "image was not uploaded successfully";
+                }
+        }
+        
+        if(!$errors['errors']){
+            $object = Article::getInstance();
+            $object->title = $title;
+            $object->text = $text;
+            $object->image = $image;
+            $object->category_id = $category_id;
+        
+            if($object->create()){
+                $successes['success'][] = "Articles was created successfully";
+                print_r(json_encode($successes));
+            }
+            else{
+                $errors['errors'][] = "Error during creating article";
+                print_r(json_encode($errors));
+            }
+        }
+        else{
+            print_r(json_encode($errors));
+        }
+        
         }
 }

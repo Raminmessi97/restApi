@@ -17,10 +17,25 @@ class AdminActions{
 		})
 	}
 
-	addNewArticle(article){
-		AdminDispatcher.dispatch({
-			actionType:AdminConstants.ADD_NEW_ARTICLE,
-			payload:article
+	setInitialCategories(){
+		axios.get('/php_projs/phenomenon/api/categories').then(response => {
+			AdminDispatcher.dispatch({
+				actionType:AdminConstants.GET_ALL_CATEGORIES,
+				payload:response.data
+			})
+		}).catch(error => {
+			console.log(error)
+		})
+	}
+
+	addNewArticle(formdata){
+		axios.post('/php_projs/phenomenon/api/articles/store',formdata).then(response => {
+			AdminDispatcher.dispatch({
+				actionType:AdminConstants.ADD_NEW_ARTICLE,
+				payload:response.data
+			})
+		}).catch(error => {
+			console.log(error)
 		})
 	}
 

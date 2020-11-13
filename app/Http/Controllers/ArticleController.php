@@ -7,6 +7,7 @@
 use App\Useful_funcs\Redirect;
 use App\Http\Request;
 
+
 class ArticleController {
 
 
@@ -14,12 +15,14 @@
      * Display a listing of the resource.
      *
      */
-	public function index(){
-		echo "articles index";
-	  // header('Content-Type: application/json');
- 	 //  $object = Article::getInstance();
- 	 //  $articles = $object->findAll()->get();
- 	 //  print_r(json_encode($articles,JSON_PRETTY_PRINT));
+	public function index($id){
+		$article = Article::find($id);
+
+		$data =  [
+			'article'=>$article[0]
+		];
+
+		View::view("articles/index",$data);
 	}
 
 

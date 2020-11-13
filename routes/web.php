@@ -8,7 +8,7 @@ Router::get('page-([0-9]+)',"MainController@main");
 
 
 // For articles
-Router::get("articles","ArticleController@index");
+Router::get("article/([0-9]+)","ArticleController@index");
 Router::get("articles/create","ArticleController@create")->middleware(['auth','admin']);
 Router::post("articles/store","ArticleController@store");
 Router::get("articles/([0-9]+)","ArticleController@edit");
