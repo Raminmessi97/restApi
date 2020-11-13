@@ -61,16 +61,12 @@ class Database{
     $count = $stmt->rowCount();
     $result = $stmt->fetchAll(\PDO::FETCH_CLASS,$class);
 
-      if($count>1){
-  		  return $result;
-      }
-
-      else if($count==1){
-        return $result[0];
-      }
-      else{
-        return $count;
-      }
+    if($count){
+		  return $result;
+    }
+    else{
+      return $count;
+    }
 		
 	}
 

@@ -10,11 +10,11 @@ class Request {
      * @param string $data
      */
 	public static function getData($data){
-      	$data = explode("&", $data);
-
+      	 
+        $new_data = explode("&", $data['request_data']);
       	$result = [];
 
-      	foreach ($data as $key) {
+      	foreach ($new_data as $key) {
       		$del = explode("=", $key);
       		$result[$del[0]] = urldecode($del[1]);
       	}
@@ -25,7 +25,38 @@ class Request {
     		    $object->$key = $value;
     		}
 
+        if($data['fileData']){
+          $object->files = $data['fileData'];
+        }
+
+
+
       	return $object;
 
 	}
+
+
+  /**
+     *Получает данные и преобразовавыет их
+     *
+     * @param array $data
+  */
+  public static function getRequestData($data){
+       
+        $new_data = $data['request_data'];
+
+        $object = new Request();
+        foreach ($new_data as $key => $value)
+        {
+            $object->$key = $value;
+        }
+
+        if($data['fileData']){
+          $object->files = $data['fileData'];
+        }
+
+
+        return $object;
+
+  }
 }

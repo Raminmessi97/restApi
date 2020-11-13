@@ -249,9 +249,25 @@ class Router{
      */
 
 	public static function rest_request_data(){
-		$response = file_get_contents('php://input');
-		$result = Request::getData($response);
-		return $result;
+
+		if(file_get_contents('php://input')){
+			$response['request_data'] = file_get_contents('php://input');
+			if($_FILES){
+				$response['fileData'] = $_FILES;	
+			}
+			$result = Request::getData($response);
+			return $result;
+		}
+
+		if($_REQUEST){
+			$response['request_data'] = $_REQUEST;
+			if($_FILES){
+				$response['fileData'] = $_FILES;	
+			}
+			$result = Request::getRequestData($response);
+			return $result;
+		}
+
 	}
 
 

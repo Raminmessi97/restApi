@@ -27,16 +27,27 @@
      * Display a category articles
      *@param string $category_name
      */
-	public function category_articles($category_name){
+	public function category_articles($category_name,$page=1){
+
 		$object = Category::getInstance();
 		$get_category = $object->findAll()->where("route_name","=",$category_name)->get();
-		$id = $get_category->id;
+		$id = $get_category[0]->id;
 
-		
-
-
-
-		// $articles = $object->findAll()->where()
+		$object2 = Article::getInstance();
+		$articles = $object2->findAll()->where("category_id","=",$id)->paginateT(4,$page);
+		if($articles){
+		    $data = [
+	           'data'=>$articles->data,
+	           'links'=>$articles->links
+	      	];
+	    }
+	    else{
+	    	$data = [
+	    		'data'=>"Нет статей"
+	    	];
+	    }
+	     
+		View::view('category/index',$data);
 	}
 
 	/**

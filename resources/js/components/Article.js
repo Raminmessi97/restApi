@@ -16,7 +16,40 @@ export default class Article extends React.Component {
 
  	}
 
+ 	TitleChanger(event){
+ 		this.setState({
+ 			title:event.target.value
+ 		})
+ 	}
 
+ 	TextChanger(event){
+ 		this.setState({
+ 			text:event.target.value
+ 		})
+ 	}
+
+ 	FileChanger(event){
+ 		this.setState({
+ 			file:event.target.files[0]
+ 		})
+ 	}
+
+ 	OnSubmit(event){
+ 		event.preventDefault();
+
+ 		var formData = new FormData()
+ 		formData.append("title",this.state.title)
+ 		formData.append("text",this.state.text)
+ 		formData.append("file",this.state.file)
+
+
+ 		axios.post('/php_projs/phenomenon/api/testData',formData).then(response => {
+ 			console.log(response.data)
+
+ 		}).catch(error =>{
+ 			console.log(error)
+ 		})
+ 	}
 
 
    
@@ -24,13 +57,18 @@ export default class Article extends React.Component {
     render(){
     return (
         <div>
-        <Ckeditor_Settings/>
+      		<form onSubmit={this.OnSubmit.bind(this)}>
+      			<input type="text" name="title" onChange={this.TitleChanger.bind(this)}/>
+      			<input type="text" name="text" onChange={this.TextChanger.bind(this)}/>
+      			<input type="file" name="filedata" onChange={this.FileChanger.bind(this)}/>
+      			<button type="submit">Upload</button>
+      		</form>
         </div>
 
     );
   }
 }
 
-if(document.getElementById("my_ckeditor")){
-	ReactDOM.render(<Article/>,document.getElementById("my_ckeditor"));
+if(document.getElementById("admin_panel")){
+	ReactDOM.render(<Article/>,document.getElementById("admin_panel"));
 }

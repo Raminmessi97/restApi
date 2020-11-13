@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Api;	
 use App\Models\Article;
 use App\Useful_funcs\Defeat;
+use App\Http\Request;
 
 class ArticleController {
 
@@ -56,5 +57,10 @@ class ArticleController {
              else{
                 echo "This article hasn't found";
              }
+        }
+
+
+        public function testData(Request $request){
+            print_r($request);
         }
 }

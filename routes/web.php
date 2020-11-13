@@ -33,7 +33,7 @@ Router::get("pelagus/page-([0-9])","AdminController@index");
 //
 
 Router::get("category/([a-zA-Z]+)","ArticleController@category_articles");
-
+Router::get("category/([a-zA-Z]+)/page-([0-9]+)","ArticleController@category_articles");
 
 
 

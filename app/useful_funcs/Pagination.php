@@ -8,15 +8,17 @@ class Pagination {
 	private $max_in_one_page;
 	private $current_page;
 	private $html;
-	private $prefix="page-";
+	private $url_main;
 	private $last_page;
 
 
 
-	public function __construct($amount,$max_in_one_page,$current_page){
+	public function __construct($amount,$max_in_one_page,$current_page,$url_main){
 		$this->amount = $amount;
 		$this->max_in_one_page = $max_in_one_page;
 		$this->current_page = $current_page;
+
+		$this->url_main= $url_main."page-";
 
 	}
 
@@ -28,7 +30,7 @@ class Pagination {
 		
 
 		if($this->current_page!=1){
-			$this->html.="<a class='left_pag' href='".$this->prefix.($this->current_page-1)."'>&lt;</a>";
+			$this->html.="<a class='left_pag' href='".$this->url_main.($this->current_page-1)."'>&lt;</a>";
 		}
 		else{
 			$this->html.="<span class='left_pag'>&lt;</span>";
@@ -41,10 +43,10 @@ class Pagination {
 		for ($i=1; $i<=$num_of_pages; $i++) {
 
 			if($i===$current_page){
-				$this->html.="<a class='pag_pages current_page' href='".$this->prefix.$i."'>".$i."</a>";
+				$this->html.="<a class='pag_pages current_page' href='".$this->url_main.$i."'>".$i."</a>";
 			}
 			else{
-				$this->html.="<a class='pag_pages no_current_pages' href='".$this->prefix.$i."'>".$i."</a>";
+				$this->html.="<a class='pag_pages no_current_pages' href='".$this->url_main.$i."'>".$i."</a>";
 			}
 			
 		}
@@ -53,7 +55,7 @@ class Pagination {
 
 		
 		if($this->current_page<$this->last_page){
-			$this->html.="<a class='right_pag' href='".$this->prefix.($this->current_page+1)."'>&gt;</a>";
+			$this->html.="<a class='right_pag' href='".$this->url_main.($this->current_page+1)."'>&gt;</a>";
 		}
 		else{
 			$this->html.="<span class='right_pag'>&gt;</span>";
@@ -65,7 +67,14 @@ class Pagination {
 	}
 
 	private function get_num_pages(){
-		$num = intval(($this->amount/$this->max_in_one_page))+1;
+		$amount = $this->amount;
+		$max = $this->max_in_one_page;
+
+		if($amount%$max)
+			$num = intval(($amount/$max))+1;
+		else
+			$num = $amount/$max;
+		
 		$this->last_page = $num;
 		return $num;
 	}

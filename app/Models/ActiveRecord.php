@@ -226,21 +226,20 @@ abstract class ActiveRecord {
      * @return $this
      */
 
-	public static function paginate($limit,$current_page,$added_url=""){
+	public static function paginate($limit,$current_page){
+
+		$url_main = "";
 		
 		$connect =  Database::getInstance();
 
 		$count = static::getCount();
 
-		$pagination = new Pagination($count,$limit,$current_page,$added_url);
+		$pagination = new Pagination($count,$limit,$current_page,$url_main);
 		$html=$pagination->get_pag();
 
 		$offset = ($current_page-1)*$limit;
 		$sql = "SELECT * FROM ".static::getTableName()." LIMIT ".$limit." OFFSET ".$offset;
 		$params = [];
-
-
-
 
 		$result = $connect->query($sql,$params,static::class);
 
@@ -257,12 +256,54 @@ abstract class ActiveRecord {
 		else{
 			return false;
 		}
-		
-
-
-
-
 	}
+
+
+
+	 /**
+     * Получаем данные в зависимости от страницы $current_page
+     *
+     * @param int $limit (Количество данных на одной странице)
+     * @return $this
+     */
+	public  function paginateT($limit,$current_page){
+
+		$url_main = URL_MAIN.URL_ROUTE;
+
+		if(preg_match("~page-([0-9]+)~", $url_main)){
+			$url_main = preg_replace("~page-([0-9]+)~", "",$url_main);
+		}
+		$url_main = trim($url_main,"/");
+		$url_main.="/";
+		
+		$connect =  Database::getInstance();
+		$count = $connect->crud($this->sql,$this->params,static::class);
+
+
+		$pagination = new Pagination($count,$limit,$current_page,$url_main);
+		$html=$pagination->get_pag();
+
+		$offset = ($current_page-1)*$limit;
+		$sql = $this->sql." LIMIT ".$limit." OFFSET ".$offset;
+		
+		$result = $connect->query($sql,$this->params,static::class);
+
+		// 
+		if($result){
+			$object = new \StdClass();
+			foreach ($result as $key => $value)
+			{
+			    $object->data[] = $value;
+			}
+			$object->links = $html; // в links мы храним ссылки на страницы
+			return $object;
+		}
+		else{
+			return false;
+		}
+	}
+
+
 
 
 
