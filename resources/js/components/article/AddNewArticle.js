@@ -18,7 +18,9 @@ export default class AddNewArticle extends Component{
 			article_create_form_status:false,
 
 			article_create_error_status:false,
-			article_create_success_status:false
+			article_create_success_status:false,
+
+			is_image_uploaded:false
 
 		}
 	}
@@ -88,8 +90,11 @@ export default class AddNewArticle extends Component{
 	}
 
 	FileChanger(event){
+		var image_url = "http://localhost/php_projs/phenomenon/resources/images/"+event.target.files[0].name
 		this.setState({
-			file:event.target.files[0]
+			is_image_uploaded:true,
+			file:event.target.files[0],
+			image_url:image_url
 		})
 	}
 
@@ -110,6 +115,12 @@ export default class AddNewArticle extends Component{
 		})
 	}
 
+	HideBeforeImage(){
+		this.setState({
+			is_image_uploaded:false,
+		})
+	}
+
 
 	_AddNewArticle(event){
 		event.preventDefault();
@@ -120,6 +131,7 @@ export default class AddNewArticle extends Component{
 		formData.append('category',this.state.category)
 		formData.append('file',this.state.file)
 		formData.append('csrf_token',this.state.csrf_token)
+
 
 		AdminActions.addNewArticle(formData)
 
@@ -167,6 +179,12 @@ export default class AddNewArticle extends Component{
 						<input type="text" placeholder="Text" onChange={this.TextChanger.bind(this)}/>
 						<label htmlFor="form_admin_image">Upload article's image</label>
 						<input type="file" id="form_admin_image" onChange={this.FileChanger.bind(this)}/>
+							{this.state.is_image_uploaded?
+								<div className="show_block admin_after_upload_img">
+								<img alt="uploaded image" src={this.state.image_url}/>
+								<span onClick={this.HideBeforeImage.bind(this)} className="close">&times;</span>
+								</div>:null}
+
 						<select onChange={this.CategoryChanger.bind(this)}>
 							{this.state.categories?this.state.categories.map((category , index) =>(
 							   <option key={index} value={category.id}>{category.name}</option>

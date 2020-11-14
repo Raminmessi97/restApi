@@ -410,12 +410,35 @@ footer {
 }
 
 .close{
-  color:#aaa;
+  color:black;
   position: absolute;
   right: 10px;top:-10px;
   font-size: 44px;
   font-weight: bold;
   cursor: pointer;
+}
+
+.admin_after_upload_img{
+  /*height: 50px;
+  width: 100%;
+  max-width: 100%;*/
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  right: 0;
+  bottom:0;
+  width: 40%;
+  height: 40%;
+  background-color:#7d8752; 
+  padding:10px;
+}
+
+.admin_after_upload_img img{
+  max-width: 100%;
+  height: auto;
+  max-height: 100%;
+  border-radius:20px;
 }
 
 
@@ -760,14 +783,12 @@ flex-direction: column;
 
 .cat_image{
   flex-grow: 30%;
-
-
 }
 
 
 .cat_articles_images{
   max-width: 100%;
-  width:300px;
+  width:230px;
   height: auto;
   padding:10px;
 }
