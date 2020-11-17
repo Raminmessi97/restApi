@@ -51,8 +51,8 @@
 
                 <?php if(!isset($_COOKIE['logged_user'])){?>
                     <div class="login-register">
-                        <a href="<?php echo URL_MAIN; ?>login">Login</a>
-                        <a href="<?php echo URL_MAIN; ?>register">Register</a>
+                        <a href="<?php echo URL_MAIN; ?>login">Sign In</a>
+                        <a href="<?php echo URL_MAIN; ?>register">Sign Up</a>
                      </div>
               <?php } ?>
             </div>

@@ -8,7 +8,6 @@ use App\Http\Request;
 
 class MainController {
 
-	
      /**
      *
      * @param  int  $current_page
@@ -22,43 +21,6 @@ class MainController {
           ];
      
           View::view('homepage',$data);
-     }
-
-
-
-
-
-	/**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-     public function ckeditor(){
-          View::view("test/create");
-     }
-
-     public function post_image(Request $request){
-          $uploaded_url = PROJECT_ROOT."resources/images/";
-
-          if($_FILES['avatar'])
-               {
-                   $avatar_name = $_FILES["avatar"]["name"];
-                   $avatar_tmp_name = $_FILES["avatar"]["tmp_name"];
-                   $error = $_FILES["avatar"]["error"];
-                   if(move_uploaded_file($avatar_tmp_name, $uploaded_url.$avatar_name))
-                    echo "Image was uploaded successfully";
-                   else
-                    echo "image was not uploaded successfully";
-               }
-               else{
-                    echo "error ";
-               }
-
-     }
-
-     public function get_data(){
-          
      }
 
 

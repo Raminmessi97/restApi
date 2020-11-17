@@ -1,8 +1,16 @@
-<?php require_once("resources/views/layouts/header.php");?>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome homme page</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="<?php echo URL_MAIN; ?>node_modules/font-awesome/css/font-awesome.min.css">
 
-<main class="content">
+    <link rel="stylesheet" type="text/css" href="<?php echo URL_MAIN; ?>resources/css/main.css">
 
-	<article>
+
+</head>
+<div class="login">
 	
 	<div class="errors">
 		<?php 
@@ -29,32 +37,29 @@
 	unset($_SESSION['login_error']);
 	 ?>
 
-	<div class="div-register-form">
-				
+	<div class="login-register-mainpage">
+		<a href="<?php echo URL_MAIN;?>">
+	        <img src="<?php echo URL_MAIN; ?>resources/images/site-icon.png" alt="site-icon" class="icon-site-img"/>
+	    </a> 
+	</div>
 
-				<form action="login/check" class="register-form" method="POST">
-					<h2>Авторизация</h2>
-					<input type="hidden" required="required" name="csrf_token" value="<?php echo $csrf_token; ?>" >
-					<input type="email" required="required" name="email" placeholder="Email">
-					<input type="password" required="required"  name="password" placeholder="Password">
-					<input type="submit" class="register-form-submit" value="Login">
-					<p>Нет аккаунта? <a href="<?php echo URL_MAIN; ?>register">Регистрация</a></p>
-				</form>
+	<div class="div-register-form">
+			<form action="login/check" class="register-form" method="POST">
+				<h2>Sign In</h2>
+				<input type="hidden" required="required" name="csrf_token" value="<?php echo $csrf_token; ?>">
+				<label for="login_email">Username</label>
+				<input type="email" required="required" name="email" id="login_email" >
+				<label for="login_email">Password</label>
+				<input type="password" required="required"  name="password" id="login_password">
+				<input type="submit" class="register-form-submit" value="Login">
+				<p><a href="<?php echo URL_MAIN; ?>register">Create Account</a></p>
+			</form>
 	</div>
 		
-	</article>
-
-
-
-
+</div>
 	
+</body>
 
-	<?php require_once("resources/views/layouts/aside.php")?>
+  <script src="<?php echo URL_MAIN; ?>resources/bundle.js"></script>
 
-</main>
-
-<?php require_once("resources/views/layouts/footer.php")?>
-
-
-
-
+</html>

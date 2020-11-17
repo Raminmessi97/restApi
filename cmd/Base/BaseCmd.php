@@ -36,11 +36,10 @@ trait BaseCmd{
 
 	public static function call_all_functions($handler){
 
-		$filename = self::$name;
+		$filename = self::modifyClassName(self::$name);
 
 		foreach (self::$one_minuse_arrays as $key => $value) {
 			$result = $handler->handle($key,$value,$filename);
-			$array = null;
 			if($result){
 				echo $result;
 			}
@@ -51,7 +50,6 @@ trait BaseCmd{
 		if(!empty(self::$two_minuse_arrays)){
 			foreach(self::$two_minuse_arrays as $key => $value) {
 				$result = $handler->handle($key,$value,$filename);
-				$array = null;
 				if($result){
 					echo $result;
 				}
@@ -63,13 +61,34 @@ trait BaseCmd{
 	}
 
 
-	public function check(){
-			$array[] =  self::$one_minuse_arrays;
-			$array[] = self::$two_minuse_arrays;
+	private static function modifyClassName($filename){
+		$array = [];
 
-			return $array;
+		$array['for_open_file'] = $filename;
+
+		// Api/ArticleController for example
+		if(preg_match("~/~", $filename)){
+			$value2 = explode("/", $filename);
+
+			$count = count($value2);
+			$new_array = array_slice($value2, 0,$count-1);
+
+			if(!empty($new_array)){
+				$namespaceName = implode($new_array,"\\");
+				$array['namespace'] = "\\".$namespaceName;
+			}
+
+			$value3 = $value2[$count-1];
+			$array['classname'] = $value3;
+		}else{
+			$array['namespace'] = "";
+			$array['classname'] = $filename;
+		}
+
+		// 
+
+		return $array;
 	}
-
    
 
 

@@ -14,11 +14,17 @@ class CreateController extends Handler{
 						return "This controller was already created"."\033[33m  \n\r";
 					}
 					else{
+
 						$fh = fopen("app/Http/Controllers/".$value.".php", "w") or die("Создать файл не удалось");
+
+
+						$namespaceName = "App\Http\Controllers".$filename['namespace'];
+						$className = $filename['classname'];
+
 						$text = <<<_END
 						<?php
-						namespace App\Http\Controllers;	\n\r
-						class $value {
+						namespace $namespaceName;	\n\r
+						class $className  {
 							//body of controller
 						}
 						_END;

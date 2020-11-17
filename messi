@@ -25,9 +25,6 @@ array_shift($argv);
 
 
 
-
-
-
 $all_handlers = [
 	'controller'=>
 	[
@@ -38,8 +35,7 @@ $all_handlers = [
 	],
 
 	'model'=>[
-		'CreateMmodel',
-		'CreateMcontroller',
+		'CreateMmodel'
 	],
 
 	'template'=>[

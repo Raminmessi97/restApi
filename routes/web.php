@@ -37,7 +37,5 @@ Router::get("category/([a-zA-Z]+)/page-([0-9]+)","ArticleController@category_art
 
 
 
-// test ckeditor
-Router::get("my_ckeditor","MainController@ckeditor");
-Router::post("my_ckeditor/post_image","MainController@post_image");
-Router::post("my_ckeditor/get_data","MainController@get_data");
+// test editor
+Router::resource("test","TestController");

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import Editor_Header from '../components/editor/Editor_Header';
+import Editor_Body from '../components/editor/Editor_Body';
 
-import AddNewItem from './AddNewItem';
-import ItemsList from './ItemsList';
 
 export default class App extends Component {
 
@@ -19,14 +19,13 @@ export default class App extends Component {
     render() {
         return (
             <div>
-                <h1 className="app-title">Flux Wallet</h1>
-                <AddNewItem />
-                <ItemsList />
+                <Editor_Header/>
+                <Editor_Body/>
             </div>
         )
     }
 }
 
-if(document.getElementById("admin_panel")){
-	ReactDOM.render(<App/>,document.getElementById("admin_panel"));
+if(document.getElementById("my_editor")){
+	ReactDOM.render(<App/>,document.getElementById("my_editor"));
 }

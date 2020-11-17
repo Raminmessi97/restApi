@@ -9,16 +9,10 @@ use Cmd\Handlers\Handler;
 			if($value!==""){
 				if($key=="-f"){
 
-					$classname = "\App\Http\Controllers\\".$filename;
-					
-					$controller = new $classname;
-
+					$classname2 = "\App\Http\Controllers\\".$filename['classname'];
+					$controller = new $classname2;
 					$existing_methods = new \ReflectionObject($controller);
-
-					// return print_r($existing_methods);
-
 					$methods = $existing_methods->getMethods();
-
 					$all_values = [];
 
 					foreach($methods as $method)
@@ -38,8 +32,13 @@ use Cmd\Handlers\Handler;
 						}
 
 
-				
-					$fp = fopen('app/Http/Controllers/'.$filename.".php", 'w') or die("Создать файл не удалось");
+
+					
+					$namespaceName = "App\Http\Controllers".$filename['namespace'];
+					$className = $filename['classname'];
+					$for_open_file= $filename['for_open_file'];
+
+					$fp = fopen('app/Http/Controllers'.$for_open_file.".php", 'w') or die("Создать файл не удалось");
 
 					$strike = implode("", $lines);
 					
@@ -55,7 +54,7 @@ use Cmd\Handlers\Handler;
 					fclose($fp);
 
 					echo "\033[32m";
-					return "Method ".$value." was added to ".$filename."\033[33m \n";
+					return "Method ".$value." was added to ".$className."\033[33m \n";
 					}
 
 

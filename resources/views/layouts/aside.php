@@ -1,29 +1,14 @@
 <aside class="right_side">
                 <div class="best-articles">
-                <h2>Популярное</h2>  
-                <ul>
-                    <li>1 Статья</li>
-                    <li>2 Статья</li>
-                    <li>3 Статья</li>
-
-                </ul>
+                <h1>Adds</h1>  
+                    <p>Add1</p>
+                    <p>Add1</p>
+                    <p>Add1</p>
                 </div>
 
-                 <div class="best-articles">
-                <h2>Популярное</h2>  
-                <ul>
-                    <li>1 Статья</li>
-                    <li>2 Статья</li>
-                    <li>3 Статья</li>
-                </ul>
+                <div class="best-articles-image-div">
+                  <img src="<?php echo URL_MAIN; ?>resources/images/site-icon.png" alt="">
                 </div>
 
-                 <div class="best-articles">
-                <h2>Реклама</h2>  
-                <ul>
-                    <li>1 Статья</li>
-                    <li>2 Статья</li>
-                    <li>3 Статья</li>
-                </ul>
-                </div>
+              
             </aside>

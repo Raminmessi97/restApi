@@ -360,26 +360,30 @@ class Router{
 		$object = new $controller;
 
 		$all_methods = ['index','show','create','store','edit','update','delete'];
-		$used_middlewares = $object->middlewares['names'];
+		
+		$used_methods = [];
+		
+			if($object->middlewares){
+			$used_middlewares = $object->middlewares['names'];
 
-		if($object->middlewares['except']){
-			$except_methods = $object->middlewares['except'];
-			foreach ($except_methods as $except_method) {
-				if(in_array($except_method, $all_methods)){
-					$key = array_search($except_method, $all_methods);
-					unset($all_methods[$key]);
+			if($object->middlewares['except']){
+				$except_methods = $object->middlewares['except'];
+				foreach ($except_methods as $except_method) {
+					if(in_array($except_method, $all_methods)){
+						$key = array_search($except_method, $all_methods);
+						unset($all_methods[$key]);
+					}
 				}
+					$used_methods = $all_methods;
 			}
+			else if($object->middlewares['only']){
+				$only_methods = $object->middlewares['only'];
+				$used_methods = $only_methods;
+			}
+			else{
 				$used_methods = $all_methods;
+			}
 		}
-		else if($object->middlewares['only']){
-			$only_methods = $object->middlewares['only'];
-			$used_methods = $only_methods;
-		}
-		else{
-			$used_methods = $all_methods;
-		}
-
 
 
 		$urls = [

@@ -4,7 +4,7 @@
 
     <article>
 		
-		<div id="my_ckeditor"></div>
+		<div id="my_editor"></div>
 
 	</article>
 

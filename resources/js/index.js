@@ -3,8 +3,8 @@ window._ = require('lodash');
 
 
 import Admin from "./components/Admin";
-// import Article from "./components/Article";
-// import App from "./components/App";
+
+import App from "./components/App";
 
 
 try {

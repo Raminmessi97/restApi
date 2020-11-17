@@ -9,9 +9,7 @@ use Cmd\Handlers\Handler;
 		public function handle($key,$value,$filename){
 			if($value!==""){
 				if($key=="--r"){
-
-						
-						$lines = file('app/Http/Controllers/'.$filename.".php");
+					$lines = file('app/Http/Controllers/'.$filename['for_open_file'].".php");
 					for($i=count($lines)-1;$i>=0;$i--)
 						{
 							if(preg_match("/\}/", $lines[$i]))
@@ -23,15 +21,16 @@ use Cmd\Handlers\Handler;
 				$arrays_of_method = ['index','show','create','store','edit','update','delete'];
 
 
-					$classname = "App\Http\Controllers";
+				$namespaceName = "App\Http\Controllers".$filename['namespace'];
+				$className = $filename['classname'];
 					
 $content = "<?php\n\r";
-$content.="namespace $classname\n\r";
+$content.="namespace $namespaceName;\n\r";
 $content.='use App\Views\View;
 use App\Useful_funcs\Defeat;
 use App\Useful_funcs\Redirect;
 use App\Http\Request;';
-$content.="\n\r\n\rclass $filename{\n\r";
+$content.="\n\r\n\rclass $className{\n\r";
 $content.='/**
 	     * Display a listing of the resource.
 	     *
@@ -92,13 +91,13 @@ $content.='/**
 
 
 				
-					$fp = fopen('app/Http/Controllers/'.$filename.".php", 'w') or die("Создать файл не удалось");
+					$fp = fopen('app/Http/Controllers/'.$filename['for_open_file'].".php", 'w') or die("Создать файл не удалось");
 
 					fwrite($fp, $content);
 					fclose($fp);
 
 					echo "\033[32m";
-					return "Methods: ".implode(",",$arrays_of_method)." were added to ".$filename."\033[33m \n";
+					return "Methods: ".implode(",",$arrays_of_method)." were added to ".$className."\033[33m \n";
 				}
 				else
 					return parent::handle($key,$value,$filename);
