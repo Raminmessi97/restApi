@@ -195,9 +195,11 @@ abstract class ActiveRecord {
 		}
 		$res = trim($res,',');
 		$params = $data;
+			
 
 		$sql = "UPDATE ".static::getTableName()." SET ".$res." WHERE id=:id";
 		$data['id'] = $id;
+
 		$result = $this->databaseConnect->crud($sql,$data,static::class);
 		return $result;
 	}

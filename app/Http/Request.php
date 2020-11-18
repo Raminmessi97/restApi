@@ -25,7 +25,7 @@ class Request {
     		    $object->$key = $value;
     		}
 
-        if($data['fileData']){
+        if(isset($data['fileData'])){
           $object->files = $data['fileData'];
         }
 
@@ -42,8 +42,9 @@ class Request {
      * @param array $data
   */
   public static function getRequestData($data){
-       
+
         $new_data = $data['request_data'];
+        unset($new_data['route']);  //удаляем ключ route
 
         $object = new Request();
         foreach ($new_data as $key => $value)
@@ -51,7 +52,7 @@ class Request {
             $object->$key = $value;
         }
 
-        if($data['fileData']){
+        if(isset($data['fileData'])){
           $object->files = $data['fileData'];
         }
 
@@ -59,4 +60,24 @@ class Request {
         return $object;
 
   }
+
+
+    public function all(){
+        $object = $this;
+
+        $array = [];
+
+        foreach($object as $key => $value) {
+                $$key = $value;
+                if(strval($key)!="csrf_token")
+                  $array[$key] = $value;
+                if(strval($key)=="files"){
+                  $name = URL_MAIN."resources/images/".$object->files['file']['name'];
+                  unset($array['files']);
+                  $array['image'] = $name;
+                }
+
+        }
+        return $array;
+    }
 }

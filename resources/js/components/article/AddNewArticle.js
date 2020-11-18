@@ -2,6 +2,9 @@ import React ,{Component} from 'react';
 import AdminActions from '../actions/AdminActions';
 import AdminStore from '../store/AdminStore';
 import Cookies from 'js-cookie';
+import JoditEditor from "jodit-react";
+import 'jodit';
+import 'jodit/build/jodit.min.css';
 
 export default class AddNewArticle extends Component{
 
@@ -20,10 +23,15 @@ export default class AddNewArticle extends Component{
 			article_create_error_status:false,
 			article_create_success_status:false,
 
-			is_image_uploaded:false
+			is_image_uploaded:false,
+			content: 'content'
 
 		}
 	}
+
+	updateContent(value) {
+        this.setState({content:value})
+    }
 
 	_onChange(){
 		this.setState({
@@ -83,11 +91,6 @@ export default class AddNewArticle extends Component{
 		})
 	}
 
-	TextChanger(event){
-		this.setState({
-			text:event.target.value
-		})
-	}
 
 	FileChanger(event){
 		var image_url = "http://localhost/php_projs/phenomenon/resources/images/"+event.target.files[0].name
@@ -127,14 +130,13 @@ export default class AddNewArticle extends Component{
 
 		var formData = new FormData()
 		formData.append('title',this.state.title)
-		formData.append('text',this.state.text)
+		formData.append('text',this.state.content)
 		formData.append('category',this.state.category)
 		formData.append('file',this.state.file)
 		formData.append('csrf_token',this.state.csrf_token)
 
 
 		AdminActions.addNewArticle(formData)
-
 
 	}
 
@@ -176,7 +178,15 @@ export default class AddNewArticle extends Component{
 				   <span onClick={this.HideForm.bind(this)} className="close">&times;</span>
 				  	<form className="admin_create_form" onSubmit={this._AddNewArticle.bind(this)}>
 						<input type="text" placeholder="Title" onChange={this.TitleChanger.bind(this)}/>
-						<input type="text" placeholder="Text" onChange={this.TextChanger.bind(this)}/>
+						<div className="texteditor_place">
+
+						<JoditEditor
+			            	editorRef={this.setRef}
+			                value={this.state.content}
+			                config={this.config}
+			                onChange={this.updateContent.bind(this)}
+			            />
+			            </div>
 						<label htmlFor="form_admin_image">Upload article's image</label>
 						<input type="file" id="form_admin_image" onChange={this.FileChanger.bind(this)}/>
 							{this.state.is_image_uploaded?

@@ -7,9 +7,19 @@
 use App\Useful_funcs\Redirect;
 use App\Http\Request;
 
+use App\Http\Controller;
 
-class ArticleController {
 
+class ArticleController extends Controller {
+
+
+	public function __construct(){
+ 		return $this->middleware(['auth','admin']); // 1-ый вариант - ко всем action-ам
+    // return $this->middleware(['auth','admin'], ['except'=>['index']]); // 1-ый вариант
+    // return $this->middleware(['auth','admin'], ['only'=>['create']]); //2-ый вариант
+ 	// return $this->middleware(['auth','admin'])->only(['create']); //3-ий вариант
+ 	// return $this->middleware(['auth','admin'])->except(['index','show']); 4-ый вариант
+}
 
 	 /**
      * Display a listing of the resource.
@@ -130,15 +140,10 @@
      */
 	public function edit($id){
 		$csrf_token = Defeat::csrf_defeat();
+		setcookie("csrf_token",$csrf_token,time()+3600,"/"); 
 
-		$object = Article::find($id);
-
-
-		$data = [
-			'csrf_token'=>$csrf_token,
-			'article'=>$object,
-		];
-		View::view("articles/edit",$data);
+		// $object = Article::find($id);
+		View::view("articles/edit");
 	}
 
 	/**

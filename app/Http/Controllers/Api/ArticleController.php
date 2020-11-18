@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Api;
 use App\Models\Article;
 use App\Useful_funcs\Defeat;
 use App\Http\Request;
+use App\Useful_funcs\NiceOutput;
 
 class ArticleController {
 
@@ -18,17 +19,22 @@ class ArticleController {
  	  print_r(json_encode($articles,JSON_PRETTY_PRINT));
 	}
 
+
+    public function show($id){
+        $article = Article::find($id);
+        print_r(NiceOutput::getNiceJson($article));
+    }
+
     public function page_articles($page){
-
-
         $pag_data = Article::paginate(5,$page);
 
           $data = [
                'data'=>$pag_data->data
           ];
          print_r(json_encode($data,JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT));
-          
     }
+
+
 
         /**
          * Show the form for editing the specified resource.
@@ -74,7 +80,7 @@ class ArticleController {
 
         //xss defeat
             $title = Defeat::xss_defeat($title);
-            $text = Defeat::xss_defeat($text);
+            // $text = Defeat::xss_defeat($text);
         // 
 
         if(!preg_match("/^[a-zA-Z0-9а-яёА-ЯЁ\s\.\-\,]{10,}$/u",$title)){
@@ -126,4 +132,66 @@ class ArticleController {
         }
         
         }
+
+
+    public function update(Request $request,$id){
+
+        $errors['errors'] = [];
+        $successes['success'] =[];
+
+        foreach($request as $key => $value) {
+            if($value){ 
+                $$key = $value;
+            }
+        }
+
+
+
+
+        // Будем хранить ошибки
+        $errors['errors'] = [];
+        // // 
+
+        $csrf_token = $request->csrf_token;
+
+        if(isset($title)){
+            $title = Defeat::xss_defeat($title); 
+            if(!preg_match("/^[a-zA-Z0-9а-яёА-ЯЁ\s\.\-]{10,}$/u",$title)){
+                 $errors['errors'][] = "Тайтл слишком короткий";
+            }
+        }
+
+        if(isset($text)){
+            if(!strlen($text)<20){
+                $errors['errors'][] = "Текст слишком короткий";
+            }
+        }
+
+        if($_SESSION['csrf_token']!==$csrf_token){
+            $errors['errors'][] = "CSRF ATTACK";
+        }
+
+        
+
+        $object = Article::find($id);
+
+        // if(!$errors['errors']){
+            // print_r("Error");
+            $result = $object->update($request->all());
+            print_r($result);
+        //     if($result){
+        //         $successes['success'][] = "Articles was updated successfully";
+        //         print_r(json_encode($success));
+        //     }
+        //     else{
+        //        $errors['errors'][] = "Error during updating article 1";
+        //       print_r(json_encode($errors));
+        //     }
+        // }
+        // else{
+        //           $errors['errors'][] = "Error during updating article 2";
+        //          print_r(json_encode($errors));
+        // }
+    }
+
 }

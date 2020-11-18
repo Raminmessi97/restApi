@@ -11,7 +11,7 @@ Router::get('page-([0-9]+)',"MainController@main");
 Router::get("article/([0-9]+)","ArticleController@index");
 Router::get("articles/create","ArticleController@create")->middleware(['auth','admin']);
 Router::post("articles/store","ArticleController@store");
-Router::get("articles/([0-9]+)","ArticleController@edit");
+Router::get("articles/([0-9]+)","ArticleController@edit")->middleware(['auth','admin']);
 Router::put("articles/([0-9]+)","ArticleController@update");
 Router::delete("articles/([0-9]+)","ArticleController@delete");
 

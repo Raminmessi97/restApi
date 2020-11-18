@@ -23,6 +23,7 @@ import AdminConstants from '../constants/AdminConstants';
 
     function addNewArticle(responses){
        _responses = responses
+       console.log(_responses)
     }
 
     function deleteArticle(response){

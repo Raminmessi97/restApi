@@ -312,11 +312,11 @@ footer {
   background-color: rgba(0,0,0,0.6);
   z-index:2;
   transition: opacity 1s;
+  overflow-y: scroll;
 }
 .admin_cr_form_wrap{
   margin:5% auto;
-  width: 38%;
-  height:50%;
+  width: 70%;
   position: relative;
   background-color:#e3e3e3;
   border-radius:12px;
@@ -324,13 +324,20 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
+   overflow-y: scroll;
 }
 .admin_create_form{
    display: flex;
    flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 60%;
+  width: 70%;
+  margin:10px;
+}
+
+.texteditor_place{
+  width: 100%;
+  margin:20px 0px;
 }
 
 .show_hide_art_crt{
@@ -450,7 +457,26 @@ footer {
   border-radius:20px;
 }
 
+.admin_update_article{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
+
+.is_changes_false{
+  position: fixed;
+  font-size: 20px;
+  top:3%;
+  right:2%;
+  background-color: #eb4444;
+  color:white;
+  transition: opacity 1.5s;
+  z-index: 2;
+  padding:17px;
+  border-radius: 10px;
+}
 
 
 #table_articles {

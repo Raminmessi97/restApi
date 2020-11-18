@@ -3,10 +3,9 @@
 <main class="content">
 
     <article>
-			
-    	<div id="admin_update_article">
-    		
-    	</div>
+		
+		<div id="my_editor_update"></div>
+
 	</article>
 
     <?php require_once("resources/views/layouts/aside.php")?>

@@ -4,7 +4,7 @@
 
     <article>
 
-    	<div class="successes">
+    	<!-- <div class="successes">
 			<?php 
 			if(isset($_SESSION['article_delete_success'])){?>
 				<p><?php echo $_SESSION['article_delete_success'];?></p>
@@ -22,7 +22,7 @@
 				<p><?php echo $_SESSION['user_logout'];?></p>
 			<?php } ?>
 
-		</div>
+		</div> -->
 
 		<div class="errors">
 			<?php if(isset($_SESSION['article_delete_error'])){?>
