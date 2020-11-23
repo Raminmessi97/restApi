@@ -20,10 +20,20 @@ class Defeat{
      * @return string
      */
 	public static function xss_defeat($var){
-		$var= strip_tags($var);
+		$var=  strip_tags($var);
 		$var = htmlentities($var, ENT_QUOTES, "UTF-8");
 		$var = htmlspecialchars($var, ENT_QUOTES);
 		return $var;
+
+		// if(is_array($data)){
+		// 	foreach ($data as $key => $value) {
+		// 		$data[$key] = htmlspecialchars($value, ENT_QUOTES);
+		// 	}
+		// }
+		// else{
+		// 	$data = htmlspecialchars($data, ENT_QUOTES);
+		// }
+		// return $data;
 	}
 
 }

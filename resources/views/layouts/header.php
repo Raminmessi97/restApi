@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Welcome homme page</title>
+    <title>Phenomenon's home page</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="<?php echo URL_MAIN; ?>node_modules/font-awesome/css/font-awesome.min.css">
@@ -39,11 +39,13 @@
                     <a href="#" class="show_user_settings">User</a>
                     
                     <div class="user-settings modal-hidden"> 
-                        <li><a href="<?php echo URL_MAIN; ?>user/cabinet">Cabinet</a></li>
-                        <li><a href="<?php echo URL_MAIN; ?>user/logout">Logout</a></li>
                         <?php if($admin){?>
-                             <li><a href="<?php echo URL_MAIN; ?>pelagus">Admin Panel</a></li>
-                        <?php }?>
+                             <li><a href="<?php echo URL_MAIN; ?>pelagus">Admin's Panel</a></li>
+                        <?php }else{
+                            ?>
+                            <li><a href="<?php echo URL_MAIN; ?>user/cabinet">Cabinet</a></li>
+                        <?php  }?>
+                        <li><a href="<?php echo URL_MAIN; ?>user/logout">Logout</a></li>
                     </div>
 
 

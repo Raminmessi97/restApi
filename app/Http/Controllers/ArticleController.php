@@ -28,6 +28,8 @@
 	public function index($id){
 		$article = Article::find($id);
 
+		$article->title = htmlspecialchars_decode($article->title); 
+
 		$data =  [
 			'article'=>$article
 		];

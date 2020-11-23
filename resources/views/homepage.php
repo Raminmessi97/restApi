@@ -4,30 +4,7 @@
 
     <article>
 
-    	<!-- <div class="successes">
-			<?php 
-			if(isset($_SESSION['article_delete_success'])){?>
-				<p><?php echo $_SESSION['article_delete_success'];?></p>
-			<?php } ?>	
-			<?php 
-			if(isset($_SESSION['login_success'])){?>
-				<p><?php echo $_SESSION['login_success'];?></p>
-			<?php } ?>
-
-			<?php if(isset($_SESSION['user_create_success'])){?>
-				<p><?php echo $_SESSION['user_create_success'];?></p>
-			<?php } ?>
-
-			<?php if(isset($_SESSION['user_logout'])){?>
-				<p><?php echo $_SESSION['user_logout'];?></p>
-			<?php } ?>
-
-		</div> -->
-
 		<div class="errors">
-			<?php if(isset($_SESSION['article_delete_error'])){?>
-				<p><?php echo $_SESSION['article_delete_error'];?></p>
-			<?php } ?>
 			<?php if(isset($_SESSION['access_error'])){?>
 			<p><?php echo $_SESSION['access_error'];?></p>
 		<?php } ?>

@@ -49,7 +49,7 @@
 				<input type="hidden" required="required" name="csrf_token" value="<?php echo $csrf_token; ?>">
 				<label for="login_email">Username</label>
 				<input type="email" required="required" name="email" id="login_email" >
-				<label for="login_email">Password</label>
+				<label for="login_password">Password</label>
 				<input type="password" required="required"  name="password" id="login_password">
 				<input type="submit" class="register-form-submit" value="Login">
 				<p><a href="<?php echo URL_MAIN; ?>register">Create Account</a></p>

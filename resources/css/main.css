@@ -29,7 +29,8 @@ header{
   display: flex;
   flex: 0 0 auto;
   flex-direction: row;
-  background-color: #bdb9b9;
+  /*background-color: #bdb9b9;*/
+  background-color: #424242;
   /*background-image: url("../images/icon-site.jpg");*/
   /*background-color: #8a9171;*/
   opacity: 0.9;
@@ -84,7 +85,7 @@ header{
 }
 .menu li a{
   text-decoration: none;
-  color:black;
+  color:white;
   font-size: 25px;
 }
 
@@ -112,7 +113,7 @@ header{
 .search-login .login-register a{
   display: inline-block;  
   font-size: 25px;
-  color:grey;
+  color:white;
   padding:10px;
 }
 
@@ -181,18 +182,45 @@ article{
 aside{
   display: flex;
   flex-direction: column;
-  background-color: #d1d1d1;
   flex-basis: 33.6%;
   padding: 15px;
   color:grey;
 }
 
 .best-articles{
-  border:1px solid gray;
+  margin:14px 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
   padding: 10px;
-  margin:5px;
   font-size: 20px;
-  /*flex-grow: 1;*/
+  box-shadow: 0px 2px 15px -5px grey;
+}
+
+.best-articles input{
+  border-radius: 2px;
+  display: block;
+  padding:8px;
+  line-height: 20px;
+  outline: none;
+  border:0.5px solid #E5E5E5;
+  margin:0px 0px 30px 0px;
+  width: 80%;
+  font-size: 16px;
+  box-shadow: 0px 2px 23px -5px rgb(225,225,225);
+}
+
+.best-articles button{
+  width: 80%;
+  padding:6px 10px;
+  font-size: 20px;
+  background-color: #424242;
+  color:white;
+  margin-top: 10px;
+  border:none;
+  cursor: pointer;
 }
 
 .best-articles-image-div{
@@ -834,16 +862,16 @@ footer {
 
 .category_article{
   display: flex;
-  background-color:#d4cdcd;
+  background-color:#424242;
   margin:20px;
-  color:#2b2a2a;
+  color:white;
   height: 200px;
   box-shadow: 2px 0px 58px -2px rgba(195,214,210,0.45);
 }
 
 
 .category_article:hover{
-  background-color: #b5aeae;
+  background-color: grey;
 }
 
 
@@ -863,8 +891,8 @@ footer {
 .cat_articles_images{
   max-width: 100%;
   max-height: 100%;
-  width:220px;
-  height: auto;
+  width:200px;
+  height: 220px;
   padding:10px;
 }
 
@@ -927,11 +955,12 @@ footer {
 
 .main_pagination a:hover{
   color:white;
-  background-color: #ff9078;
+  background-color: black;
 }
 
 .current_page{
-  background-color: #e3b6b3;
+  background-color: grey;
+  color:white;
 }
 
 .no_current_pages{

@@ -13,10 +13,9 @@ class ArticleController {
      *
      */
 	public function index(){
-	  header('Content-Type: application/json');
  	  $object = Article::getInstance();
  	  $articles = $object->findAll()->get();
- 	  print_r(json_encode($articles,JSON_PRETTY_PRINT));
+ 	  print_r(NiceOutput::getNiceJson($articles));
 	}
 
 
@@ -77,11 +76,6 @@ class ArticleController {
         $csrf_token = $request->csrf_token;
         $file = $request->files;
 
-
-        //xss defeat
-            $title = Defeat::xss_defeat($title);
-            // $text = Defeat::xss_defeat($text);
-        // 
 
         if(!preg_match("/^[a-zA-Z0-9а-яёА-ЯЁ\s\.\-\,]{10,}$/u",$title)){
             $errors['errors'][] = "Тайтл слишком короткий";
@@ -155,7 +149,7 @@ class ArticleController {
         $csrf_token = $request->csrf_token;
 
         if(isset($title)){
-            $title = Defeat::xss_defeat($title); 
+            $request->title = htmlspecialchars($title);
             if(!preg_match("/^[a-zA-Z0-9а-яёА-ЯЁ\s\.\-]{10,}$/u",$title)){
                  $errors['errors'][] = "Тайтл слишком короткий";
             }
