@@ -149,7 +149,7 @@ class ArticleController {
         $csrf_token = $request->csrf_token;
 
         if(isset($title)){
-            $request->title = htmlspecialchars($title);
+            $request->title = Defeat::xss_defeat($title);
             if(!preg_match("/^[a-zA-Z0-9а-яёА-ЯЁ\s\.\-]{10,}$/u",$title)){
                  $errors['errors'][] = "Тайтл слишком короткий";
             }

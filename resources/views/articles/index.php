@@ -36,8 +36,15 @@
 	 </div>
 
 	 <div class="article_with_one_theme">
+	 	
+	 	<div class="read_sim_art">
+	 		<p>Читайте похожие статьи</p>
+	 	</div>
+
+
+	 	<div class="similar_articles_body">
 	 	<?php foreach($similar_articles as $similar_article){?>
-	 		<a href="<?php echo URL_MAIN.$similar_article->id;?>">
+	 		<a href="<?php echo URL_MAIN.'article/'.$similar_article->id;?>">
 		 		<div class="similar_articles">
 		 			<div class="similar_article_image">
 		 				<img src="<?php echo $similar_article->image;?>"/>
@@ -49,6 +56,8 @@
 		 		</div>
 	 		</a>
 	 	<?php } ?>
+	 	</div>
+
 	 </div>
 
 	 <div class="one_article_comment">

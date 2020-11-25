@@ -348,7 +348,7 @@ class Router{
 			}
 			else{
 				$url = "";
-				Redirect::redirect($url,"access_error","Туда нельзя--)");
+				Redirect::redirect($url,"access_error","Запрещенная область");
 			}
 		}
 	}

@@ -9,6 +9,18 @@ $(document).ready(function(){
 	}
 	});
 
+  
+
+  $(".close_errors").on("click",function(){
+	if( $('.errors').hasClass('modal-hidden') ) {
+		$('.errors').removeClass('modal-hidden');
+	}
+	else{
+		$('.errors').addClass('modal-hidden');
+	}
+	});
+
+
 
 
 

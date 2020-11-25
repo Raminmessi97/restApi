@@ -2,7 +2,7 @@
 
 <main class="content">
 
-    <article>
+    <article class="admin_update_art">
 			
     	<div id="admin_update_article">
     		

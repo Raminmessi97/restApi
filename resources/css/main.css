@@ -289,6 +289,9 @@ aside{
   display: flex;
   justify-content: center;
   width: 100%;
+   position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
 }
 
 
@@ -547,11 +550,35 @@ footer {
   border-radius:20px;
 }
 
+.admin_update_art{
+  display: flex;
+  justify-content: flex-start;
+   align-items: flex-start;
+   width: 100%;
+}
 .admin_update_article{
   display: flex;
+   width: 100%;
+}
+
+
+#admin_add_actions{
+  position: fixed;
+  right: 20px;
+  top:50%;
+  top:center;
+  display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  background-color: #555555;
+  padding:15px;
+  margin:10px;
+}
+
+#admin_update_article{
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+   width: 100%;
 }
 
 
@@ -684,6 +711,16 @@ footer {
    margin:10px;
    color:white;
    border-radius: 5px;
+   min-width: 200px;
+}
+
+.close_errors{
+  color:white;
+  position: absolute;
+  right: 10px;top:-10px;
+  font-size: 44px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .errors p{
@@ -915,7 +952,11 @@ footer {
   display: flex;
   flex-direction: column;
   margin:20px;
-   border:1px solid rgba(0,0,2,0.13);
+  border:1px solid rgba(0,0,2,0.13);
+}
+
+.category_article:hover{
+   border:1px solid rgba(75, 184, 142,2);
 }
 
 .category_article hr{
@@ -1040,12 +1081,25 @@ footer {
 }
 
 .article_with_one_theme{
-   display: flex;
+  display: flex;
   width: 90%;
   flex-direction: column;
   padding:20px;
   border:1px solid rgba(0,0,2,0.13);
   margin-top:20px;
+}
+
+.read_sim_art{
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ padding: 20px 10px;font-size: 20px;
+ font-weight: bold;
+}
+
+.similar_articles_body{
+display: flex;
+flex-direction: row;
 }
 
 .one_article_comment{
@@ -1117,11 +1171,6 @@ footer {
   /*margin-top: -9px;*/
 }
 
-.article_with_one_theme{
- display: flex;
- flex-direction: row;
- flex-grow: 1;
-}
 
 .article_with_one_theme a{
   text-decoration: none;
@@ -1185,7 +1234,7 @@ footer {
 
 .main_pagination a:hover{
   color:white;
-  background-color: black;
+  background-color: #4BB88E;
 }
 
 .current_page{
@@ -1499,4 +1548,6 @@ font-size: 25px;
   color:grey;
 }
 /**/
+
+
 

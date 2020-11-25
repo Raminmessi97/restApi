@@ -7,7 +7,9 @@
 		<div class="errors">
 			<?php if(isset($_SESSION['access_error'])){?>
 			<p><?php echo $_SESSION['access_error'];?></p>
+			<span class="close_errors">&times;</span>
 		<?php } ?>
+
 		</div>
 
 		<?php

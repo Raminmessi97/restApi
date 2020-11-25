@@ -172,7 +172,11 @@ export default class AddNewArticle extends Component{
 	          )):null}
 	        </div>	
 
+        	<div id="admin_add_actions">
 				<button className="show_hide_art_crt" onClick={this.ShowForm.bind(this)}>Create article</button>
+			</div>
+
+
 				<div className={this.state.article_create_form_status?"admin_create_art_form show_block":"hide_block"}>
 				  <div className="admin_cr_form_wrap">
 				   <span onClick={this.HideForm.bind(this)} className="close">&times;</span>
