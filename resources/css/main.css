@@ -258,7 +258,7 @@ aside{
 
 .best-articles h1{
   color:#4BB88E;
-  padding: 10px;
+  padding:10px;
 }
 
 .best-articles input{
@@ -996,30 +996,118 @@ footer {
 
 /*one_article*/
 .one_article{
-  display: flex;
+ display: flex;
+  width: 90%;
   flex-direction: column;
+  padding:20px;
+  border:1px solid grey;
+}
+.one_article_info{
+  display: flex;
+  align-self: flex-end;
+  /*padding: 10px 15px;*/
+   width: 90%;
+   position: relative;
 }
 
-.nice_border{
-  border-radius: 4px;
-  -webkit-box-shadow: 2px 2px 19px -7px rgba(0,0,0,1);
-  -moz-box-shadow: 2px 2px 19px -7px rgba(0,0,0,1);
-  box-shadow: 2px 2px 19px -7px rgba(0,0,0,1);
-  padding:10px 20px;
-  margin:20px;
+.nav_to_article{
+  display: flex;
+  flex-basis: 70%;
+  padding: 10px 15px;
+}
+.one_article_upd_date{
+  position: absolute;
+  right: 0;
+  padding: 10px 15px;
+  margin: 10px;
+  background:#b1e3d4;
 }
 
 .one_article_title{
- 
+  display: flex;
+  justify-content: flex-start;
+  padding:10px 20px;
+  font-size: 20px;
+  font-weight: bolder;
 }
 
 .one_article_text{
- 
+  display: flex;
+  justify-content: flex-start;
+  padding:10px 20px;
+  font-size: 18px;
+  line-height: 30px;  
 }
 
 .one_article_comment{
-  
+  display: flex;
+  width: 90%;
+  flex-direction: column;
+  padding:20px;
+  border:1px solid grey;
+  margin-top:20px;
 }
+.arrow1 a{
+  text-decoration: none;
+   color:black; 
+}
+.arrow1 {
+  /*width: 300px;*/
+  padding: 10px 15px;
+  position: relative;
+  background:#b1e3d4;
+  color:black; 
+  margin:0 10px;
+}
+
+.arrow2 a{
+  text-decoration: none;
+   color:black; 
+   padding:0 10px;
+}
+.arrow2 {
+  /*width: 300px;*/
+  padding: 10px 15px;
+  position: relative;
+  background:#b1e3d4;
+  color:black; 
+   margin:0 10px;
+}
+
+
+.arrow1:before {
+  content: ""; 
+  border: solid transparent;
+  position: absolute;    
+  left: 100%;
+  top: 0;
+  border-left-color:#b1e3d4 ;
+  border-width: 19px;
+  /*margin-top: -9px;*/
+}
+
+.arrow2:before {
+  content: ""; 
+  border: solid transparent;
+  position: absolute;    
+  left: 0%;
+  top: 0;
+  border-left-color:#F7F7F7 ;
+  border-width: 19px;
+  /*margin-top: -9px;*/
+}
+
+.arrow2:after {
+  content: ""; 
+  border: solid transparent;
+  position: absolute;    
+  left: 100%;
+  top: 0;
+  border-left-color:#b1e3d4 ;
+  border-width: 19px;
+  /*margin-top: -9px;*/
+}
+
 
 /**/
 

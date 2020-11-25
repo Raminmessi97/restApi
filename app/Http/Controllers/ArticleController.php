@@ -26,12 +26,17 @@
      *
      */
 	public function index($id){
-		$article = Article::find($id);
+		$article = Article::find($id);	
 
-		$article->title = htmlspecialchars_decode($article->title); 
+	   $timestamp = strtotime($article->updated_at);
+       $new_date = date("d-m-Y", $timestamp);
+       $article->updated_at = $new_date;
+
+       $category = $article->getCategoryData();
 
 		$data =  [
-			'article'=>$article
+			'article'=>$article,
+			'category'=>$category,
 		];
 
 		View::view("articles/index",$data);
