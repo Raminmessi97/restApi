@@ -35,6 +35,22 @@
 
 	 </div>
 
+	 <div class="article_with_one_theme">
+	 	<?php foreach($similar_articles as $similar_article){?>
+	 		<a href="<?php echo URL_MAIN.$similar_article->id;?>">
+		 		<div class="similar_articles">
+		 			<div class="similar_article_image">
+		 				<img src="<?php echo $similar_article->image;?>"/>
+		 			</div>
+
+		 			<div class="similar_article_title">
+		 				<?php echo $similar_article->title;?>
+		 			</div>
+		 		</div>
+	 		</a>
+	 	<?php } ?>
+	 </div>
+
 	 <div class="one_article_comment">
 	 		<p>Комментарии</p>
 	 </div>

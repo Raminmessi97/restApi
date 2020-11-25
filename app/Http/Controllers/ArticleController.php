@@ -34,9 +34,12 @@
 
        $category = $article->getCategoryData();
 
+       $similar_articles = $article->getSimilarArticles();
+
 		$data =  [
 			'article'=>$article,
 			'category'=>$category,
+			'similar_articles'=>$similar_articles,
 		];
 
 		View::view("articles/index",$data);

@@ -14,4 +14,13 @@ class Article extends ActiveRecord {
 		$category = Category::find($id);
 		return $category;
 	}
+
+	public function getSimilarArticles(){
+		$count = 3;  //берем последние 3 записи
+		$id = $this->category_id;
+
+		$params = ["category_id"=>$id];
+
+		return Article::getLastData($count,$params);
+	}
 }

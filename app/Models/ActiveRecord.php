@@ -327,6 +327,32 @@ abstract class ActiveRecord {
 	}
 
 
+
+	 /**
+     * Получаем данные в зависимости от страницы $current_page
+     *
+     * @param int $count (Количество получаемых данных)
+     * @return $this
+     */
+     public static function getLastData($count,$params){
+
+     	$result = "";
+
+     	foreach ($params as $key => $value) {
+     		$result.=$key."=:".$key.",";
+     	}
+     	$result = trim($result,",");
+
+     	$connect =  Database::getInstance();
+
+		$sql = "SELECT * FROM ".static::getTableName()." WHERE ".$result." ORDER BY created_at DESC LIMIT ".$count;
+		$params = $params;
+
+		$result = $connect->query($sql,$params,static::class);
+		return $result;
+     }
+
+
 	/**
      * Конечный метод
      */
